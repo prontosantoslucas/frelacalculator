@@ -1,0 +1,4040 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Alpha System — Calculadora de Preço de Sites e Contrato PDF</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314558f'/%3E%3Cstop offset='100%25' stop-color='%230d2b4e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='2' y='2' width='44' height='44' rx='7' fill='url(%23g)'/%3E%3Cpath d='M24 10.5L36.5 36.5H31L24 21.2L17 36.5H11.5Z' fill='%23ffffff'/%3E%3Crect x='19.5' y='31.2' width='9' height='3.6' rx='1' fill='%23cbd5e1'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --topbar-bg-light: #1c2430;
+      --topbar-border-light: #0f172a;
+      --topbar-text: #f3f6f9;
+      --topbar-muted: #b5c0ce;
+      --topbar-hover: #2b3647;
+
+      --topbar-bg-dark: #12161c;
+      --topbar-border-dark: #2a313c;
+
+      --bg-light: #eef1f4;
+      --surface-light: #ffffff;
+      --surface-alt-light: #f6f8fa;
+      --surface-stripe-light: #fafbfc;
+      --text-light: #212529;
+      --muted-light: #545d66;
+      --border-light: #ced4da;
+      --border-soft-light: #dee2e6;
+      --input-border-light: #7a848e;
+      --accent-light: #0f4c81;
+      --accent-hover-light: #0b3a63;
+      --accent-text-light: #ffffff;
+      --accent-soft-light: #eef4fa;
+      --cta-light: #157347;
+      --cta-hover-light: #115c39;
+      --cta-text-light: #ffffff;
+      --success-bg-light: #eef7f2;
+      --success-border-light: #198754;
+      --success-text-light: #0f5132;
+      --error-bg-light: #fdf2f2;
+      --error-border-light: #b02a37;
+      --error-text-light: #842029;
+      --warn-bg-light: #fff9e6;
+      --warn-border-light: #997404;
+      --warn-text-light: #664d03;
+      --shadow-light: 0 1px 2px rgba(15, 23, 42, 0.06);
+      --bar-shadow-light: 0 -2px 10px rgba(15, 23, 42, 0.08);
+
+      --bg-dark: #181d23;
+      --surface-dark: #20262e;
+      --surface-alt-dark: #272f39;
+      --surface-stripe-dark: #232a33;
+      --text-dark: #e6ebf1;
+      --muted-dark: #a4b0be;
+      --border-dark: #37414e;
+      --border-soft-dark: #2f3844;
+      --input-border-dark: #6b7785;
+      --accent-dark: #5ca4e6;
+      --accent-hover-dark: #7ab8ef;
+      --accent-text-dark: #0d131a;
+      --accent-soft-dark: #1d2d3e;
+      --cta-dark: #238636;
+      --cta-hover-dark: #2ea043;
+      --cta-text-dark: #ffffff;
+      --success-bg-dark: #13281d;
+      --success-border-dark: #3fb950;
+      --success-text-dark: #9be9a8;
+      --error-bg-dark: #2e1619;
+      --error-border-dark: #f85149;
+      --error-text-dark: #ffb4ad;
+      --warn-bg-dark: #2c2310;
+      --warn-border-dark: #d29922;
+      --warn-text-dark: #f2cc60;
+      --shadow-dark: 0 1px 2px rgba(0, 0, 0, 0.35);
+      --bar-shadow-dark: 0 -2px 12px rgba(0, 0, 0, 0.45);
+
+      --topbar-bg: var(--topbar-bg-light);
+      --topbar-border: var(--topbar-border-light);
+      --bg: var(--bg-light);
+      --surface: var(--surface-light);
+      --surface-alt: var(--surface-alt-light);
+      --surface-stripe: var(--surface-stripe-light);
+      --text: var(--text-light);
+      --muted: var(--muted-light);
+      --border: var(--border-light);
+      --border-soft: var(--border-soft-light);
+      --input-border: var(--input-border-light);
+      --accent: var(--accent-light);
+      --accent-hover: var(--accent-hover-light);
+      --accent-text: var(--accent-text-light);
+      --accent-soft: var(--accent-soft-light);
+      --cta: var(--cta-light);
+      --cta-hover: var(--cta-hover-light);
+      --cta-text: var(--cta-text-light);
+      --success-bg: var(--success-bg-light);
+      --success-border: var(--success-border-light);
+      --success-text: var(--success-text-light);
+      --error-bg: var(--error-bg-light);
+      --error-border: var(--error-border-light);
+      --error-text: var(--error-text-light);
+      --warn-bg: var(--warn-bg-light);
+      --warn-border: var(--warn-border-light);
+      --warn-text: var(--warn-text-light);
+      --shadow: var(--shadow-light);
+      --bar-shadow: var(--bar-shadow-light);
+
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --radius: 0.25rem;
+      --radius-sm: 0.1875rem;
+
+      color-scheme: light dark;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --topbar-bg: var(--topbar-bg-dark);
+        --topbar-border: var(--topbar-border-dark);
+        --bg: var(--bg-dark);
+        --surface: var(--surface-dark);
+        --surface-alt: var(--surface-alt-dark);
+        --surface-stripe: var(--surface-stripe-dark);
+        --text: var(--text-dark);
+        --muted: var(--muted-dark);
+        --border: var(--border-dark);
+        --border-soft: var(--border-soft-dark);
+        --input-border: var(--input-border-dark);
+        --accent: var(--accent-dark);
+        --accent-hover: var(--accent-hover-dark);
+        --accent-text: var(--accent-text-dark);
+        --accent-soft: var(--accent-soft-dark);
+        --cta: var(--cta-dark);
+        --cta-hover: var(--cta-hover-dark);
+        --cta-text: var(--cta-text-dark);
+        --success-bg: var(--success-bg-dark);
+        --success-border: var(--success-border-dark);
+        --success-text: var(--success-text-dark);
+        --error-bg: var(--error-bg-dark);
+        --error-border: var(--error-border-dark);
+        --error-text: var(--error-text-dark);
+        --warn-bg: var(--warn-bg-dark);
+        --warn-border: var(--warn-border-dark);
+        --warn-text: var(--warn-text-dark);
+        --shadow: var(--shadow-dark);
+        --bar-shadow: var(--bar-shadow-dark);
+      }
+    }
+
+    @supports (color: light-dark(white, black)) {
+      :root {
+        --topbar-bg: light-dark(var(--topbar-bg-light), var(--topbar-bg-dark));
+        --topbar-border: light-dark(var(--topbar-border-light), var(--topbar-border-dark));
+        --bg: light-dark(var(--bg-light), var(--bg-dark));
+        --surface: light-dark(var(--surface-light), var(--surface-dark));
+        --surface-alt: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+        --surface-stripe: light-dark(var(--surface-stripe-light), var(--surface-stripe-dark));
+        --text: light-dark(var(--text-light), var(--text-dark));
+        --muted: light-dark(var(--muted-light), var(--muted-dark));
+        --border: light-dark(var(--border-light), var(--border-dark));
+        --border-soft: light-dark(var(--border-soft-light), var(--border-soft-dark));
+        --input-border: light-dark(var(--input-border-light), var(--input-border-dark));
+        --accent: light-dark(var(--accent-light), var(--accent-dark));
+        --accent-hover: light-dark(var(--accent-hover-light), var(--accent-hover-dark));
+        --accent-text: light-dark(var(--accent-text-light), var(--accent-text-dark));
+        --accent-soft: light-dark(var(--accent-soft-light), var(--accent-soft-dark));
+        --cta: light-dark(var(--cta-light), var(--cta-dark));
+        --cta-hover: light-dark(var(--cta-hover-light), var(--cta-hover-dark));
+        --cta-text: light-dark(var(--cta-text-light), var(--cta-text-dark));
+        --success-bg: light-dark(var(--success-bg-light), var(--success-bg-dark));
+        --success-border: light-dark(var(--success-border-light), var(--success-border-dark));
+        --success-text: light-dark(var(--success-text-light), var(--success-text-dark));
+        --error-bg: light-dark(var(--error-bg-light), var(--error-bg-dark));
+        --error-border: light-dark(var(--error-border-light), var(--error-border-dark));
+        --error-text: light-dark(var(--error-text-light), var(--error-text-dark));
+        --warn-bg: light-dark(var(--warn-bg-light), var(--warn-bg-dark));
+        --warn-border: light-dark(var(--warn-border-light), var(--warn-border-dark));
+        --warn-text: light-dark(var(--warn-text-light), var(--warn-text-dark));
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      accent-color: var(--accent);
+      scroll-padding-top: 4.5rem;
+      scroll-padding-bottom: 8rem;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--text);
+      background-color: var(--bg);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .visually-hidden:where(:not(:focus-within, :active)) {
+      position: absolute !important;
+      clip-path: inset(50%) !important;
+      overflow: hidden !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    .skip-link:focus {
+      position: fixed;
+      inset-block-start: 0.75rem;
+      inset-inline-start: 0.75rem;
+      z-index: 100;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      background: var(--accent);
+      color: var(--accent-text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Barra superior estilo sistema corporativo PHP */
+    .topbar {
+      background-color: var(--topbar-bg);
+      color: var(--topbar-text);
+      border-block-end: 1px solid var(--topbar-border);
+    }
+
+    .topbar-inner {
+      max-inline-size: 74rem;
+      margin-inline: auto;
+      padding: 0.625rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-inline-size: 0;
+    }
+
+    .brand-mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      flex: none;
+      display: block;
+    }
+
+    .brand-mark .brand-badge-rim {
+      stroke: rgba(147, 197, 253, 0.45);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+      min-inline-size: 0;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--topbar-text);
+    }
+
+    .brand-name-accent {
+      color: #93c5fd;
+      font-weight: 600;
+    }
+
+    .brand-cnpj {
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: 0.03em;
+      color: var(--topbar-muted);
+    }
+
+    .topbar-nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .topbar-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.375rem 0.65rem;
+      min-block-size: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--topbar-text);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.12s ease, border-color 0.12s ease;
+    }
+
+    .topbar-nav a:hover {
+      background-color: var(--topbar-hover);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .topbar-nav a:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: 2px;
+    }
+
+    /* Faixa de subheader e breadcrumb */
+    .page-subheader {
+      background-color: var(--surface);
+      border-block-end: 1px solid var(--border);
+    }
+
+    .page-subheader-inner {
+      max-inline-size: 74rem;
+      margin-inline: auto;
+      padding: 0.875rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+    }
+
+    .breadcrumb {
+      margin: 0 0 0.2rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .page-subheader h1 {
+      margin: 0 0 0.15rem;
+      font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .subheader-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .sys-meta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--surface-alt);
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .layout {
+      max-inline-size: 74rem;
+      margin-inline: auto;
+      padding: 1rem 1rem calc(7.5rem + env(safe-area-inset-bottom, 0px));
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: 60rem) {
+      .topbar-inner,
+      .page-subheader-inner {
+        padding-inline: 1.5rem;
+      }
+
+      .layout {
+        padding: 1.25rem 1.5rem calc(7.5rem + env(safe-area-inset-bottom, 0px));
+        grid-template-columns: minmax(0, 1.3fr) minmax(22rem, 0.95fr);
+        align-items: start;
+        gap: 1.25rem;
+      }
+
+      #sec-resultado {
+        grid-column: 2;
+        grid-row: 1 / span 3;
+        position: sticky;
+        inset-block-start: 1rem;
+      }
+    }
+
+    /* Painéis clássicos com cabeçalho */
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0;
+      box-shadow: var(--shadow);
+    }
+
+    #sec-resultado {
+      border-block-start: 3px solid var(--accent);
+    }
+
+    .card-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      background-color: var(--surface-alt);
+      border-block-end: 1px solid var(--border);
+      border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    @media (min-width: 40rem) {
+      .card-header {
+        padding: 0.75rem 1.25rem;
+      }
+
+      .card-body {
+        padding: 1.15rem 1.25rem;
+      }
+    }
+
+    .section-lead {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0 0 1.25rem;
+      padding: 0;
+      min-inline-size: 0;
+    }
+
+    fieldset:last-child {
+      margin-block-end: 0;
+    }
+
+    legend {
+      padding: 0;
+      margin-block-end: 0.4rem;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+
+    .fieldset-hint {
+      margin: -0.15rem 0 0.6rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    /* Pacotes selecionáveis */
+    .package-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.625rem;
+    }
+
+    .package-card {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      transition: border-color 0.12s ease, background-color 0.12s ease;
+    }
+
+    .package-card:hover {
+      border-color: var(--accent);
+    }
+
+    .package-card.is-selected {
+      border-color: var(--accent);
+      border-inline-start-width: 4px;
+      background-color: var(--accent-soft);
+    }
+
+    .package-card .choice-input {
+      margin-block-start: 0.25rem;
+    }
+
+    .package-label {
+      flex: 1;
+      min-inline-size: 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .package-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .package-title {
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .package-price {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .package-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.5rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .package-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--surface-alt);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+
+    .package-cue {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .package-includes {
+      margin-block-start: 0.35rem;
+      padding-block-start: 0.6rem;
+      border-block-start: 1px solid var(--border-soft);
+    }
+
+    .package-includes[hidden],
+    .package-cue[hidden] {
+      display: none;
+    }
+
+    .includes-heading {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-block-end: 0.4rem;
+    }
+
+    .check-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.35rem 0.75rem;
+    }
+
+    @media (min-width: 38rem) {
+      #sec-site .check-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+      line-height: 1.35;
+    }
+
+    .check-icon {
+      inline-size: 1rem;
+      block-size: 1rem;
+      flex-shrink: 0;
+      margin-block-start: 0.12rem;
+      color: var(--success-border);
+    }
+
+    /* List-group estilo Bootstrap para extras e opções */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      overflow: hidden;
+    }
+
+    .choice-grid-3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .choice-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding-inline-start: 0.875rem;
+      border: 0;
+      border-block-end: 1px solid var(--border-soft);
+      border-radius: 0;
+      background-color: var(--surface);
+      min-block-size: 46px;
+      transition: background-color 0.12s ease;
+    }
+
+    .choice-item:last-child {
+      border-block-end: 0;
+    }
+
+    .choice-item:hover:not(.is-included) {
+      background-color: var(--surface-alt);
+    }
+
+    .choice-item:has(.choice-input:checked):not(.is-included) {
+      background-color: var(--accent-soft);
+      border-inline-start: 3px solid var(--accent);
+    }
+
+    .choice-item.is-included {
+      background-color: var(--success-bg);
+      border-inline-start: 3px solid var(--success-border);
+    }
+
+    @media (min-width: 34rem) {
+      .choice-grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .choice-grid-3 .choice-item {
+        border-block-end: 0;
+        border-inline-end: 1px solid var(--border-soft);
+      }
+
+      .choice-grid-3 .choice-item:last-child {
+        border-inline-end: 0;
+      }
+
+      .choice-grid-3 .choice-item:has(.choice-input:checked) {
+        border-inline-start: 0;
+        border-block-start: 3px solid var(--accent);
+      }
+    }
+
+    .choice-input {
+      inline-size: 1.15rem;
+      block-size: 1.15rem;
+      margin: 0;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .choice-input:disabled {
+      cursor: default;
+    }
+
+    .choice-label {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.3rem 0.625rem;
+      padding: 0.625rem 0.875rem 0.625rem 0.125rem;
+      min-block-size: 46px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .choice-item.is-included .choice-label {
+      cursor: default;
+    }
+
+    .choice-text {
+      line-height: 1.3;
+    }
+
+    .choice-meta {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .choice-item:has(.choice-input:checked):not(.is-included) .choice-meta {
+      color: var(--text);
+    }
+
+    .badge-included {
+      display: inline-block;
+      padding: 0.12rem 0.45rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      background-color: var(--surface);
+      color: var(--success-text);
+      border: 1px solid var(--success-border);
+    }
+
+    @supports not (accent-color: #0f4c81) {
+      .choice-input {
+        position: absolute !important;
+        clip-path: inset(50%) !important;
+        overflow: hidden !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        white-space: nowrap !important;
+      }
+
+      .choice-item {
+        padding-inline-start: 0.875rem;
+      }
+
+      .choice-text,
+      .package-title {
+        position: relative;
+        padding-inline-start: 1.85rem;
+        display: inline-block;
+      }
+
+      .choice-text::before,
+      .package-title::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        inline-size: 1.2rem;
+        block-size: 1.2rem;
+        border: 2px solid var(--input-border);
+        background-color: var(--surface);
+      }
+
+      input[type="checkbox"].choice-input + .choice-label > .choice-text::before {
+        border-radius: 0.1875rem;
+      }
+
+      input[type="radio"].choice-input + .choice-label > .choice-text::before,
+      input[type="radio"].package-radio + .package-label .package-title::before {
+        border-radius: 999px;
+      }
+
+      .choice-input:focus-visible + .choice-label > .choice-text::before,
+      .package-radio:focus-visible + .package-label .package-title::before {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .choice-input:checked + .choice-label > .choice-text::before,
+      .package-radio:checked + .package-label .package-title::before {
+        border-color: var(--accent);
+        background-color: var(--accent);
+      }
+
+      input[type="checkbox"].choice-input:checked + .choice-label > .choice-text::after {
+        content: "✓";
+        position: absolute;
+        inset-inline-start: 0.2rem;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        color: var(--accent-text);
+        font-weight: 800;
+        font-size: 0.9rem;
+        line-height: 1;
+      }
+
+      input[type="radio"].choice-input:checked + .choice-label > .choice-text::after,
+      input[type="radio"].package-radio:checked + .package-label .package-title::after {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0.34rem;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        inline-size: 0.52rem;
+        block-size: 0.52rem;
+        border-radius: 999px;
+        background-color: var(--accent-text);
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.28rem;
+      margin-block-end: 0.95rem;
+    }
+
+    .field:last-child {
+      margin-block-end: 0;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 34rem) {
+      .field-grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .field-grid-2 .field-span-2 {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .field label {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .req-mark {
+      color: var(--error-text);
+      font-weight: 700;
+    }
+
+    .field-hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    textarea {
+      font: inherit;
+      font-size: max(1rem, 1em);
+      color: var(--text);
+      background-color: var(--surface);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.7rem;
+      min-block-size: 44px;
+      inline-size: 100%;
+      transition: border-color 0.12s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    /* Input-group conectado estilo Bootstrap */
+    .stepper {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      max-inline-size: 13.5rem;
+    }
+
+    .stepper input[type="number"] {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      border-radius: 0;
+      border-inline: 0;
+    }
+
+    .stepper-btn {
+      font: inherit;
+      font-size: max(1.1rem, 1.1em);
+      font-weight: 700;
+      min-inline-size: 44px;
+      min-block-size: 44px;
+      padding: 0 0.75rem;
+      border: 1px solid var(--input-border);
+      background-color: var(--surface-alt);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    #pages-dec {
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    }
+
+    #pages-inc {
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .stepper-btn:hover {
+      background-color: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .error-msg {
+      display: none;
+      margin-block-start: 0.15rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: var(--radius-sm);
+      border-inline-start: 3px solid var(--error-border);
+      background-color: var(--error-bg);
+      color: var(--error-text);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    input:is(:user-invalid, .user-invalid-fallback) {
+      border-color: var(--error-border);
+      background-color: var(--error-bg);
+    }
+
+    input:is(:user-invalid, .user-invalid-fallback) ~ .error-msg {
+      display: block;
+    }
+
+    .warn-box {
+      padding: 0.7rem 0.85rem;
+      margin-block-end: 0.875rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      border-inline-start: 4px solid var(--warn-border);
+      color: var(--warn-text);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .warn-box[hidden] {
+      display: none;
+    }
+
+    .summary-pkg {
+      padding: 0.85rem 0.95rem;
+      margin-block-end: 0.875rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background-color: var(--surface-alt);
+    }
+
+    .summary-pkg-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.4rem;
+      margin-block-end: 0.3rem;
+    }
+
+    .summary-pkg-name {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .summary-pkg-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0 0 0.55rem;
+    }
+
+    .total-box {
+      padding: 0.875rem 1rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-inline-start: 4px solid var(--accent);
+      margin-block-end: 0.875rem;
+    }
+
+    .total-kicker {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .total-value {
+      display: block;
+      margin: 0.15rem 0;
+      font-size: clamp(1.65rem, 1.35rem + 1vw, 2.05rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .total-deadline {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .total-deadline-note {
+      margin: 0.15rem 0 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      margin-block-end: 0.875rem;
+      overflow: hidden;
+    }
+
+    .split-card {
+      padding: 0.65rem 0.75rem;
+      background-color: var(--surface);
+    }
+
+    .split-card + .split-card {
+      border-inline-start: 1px solid var(--border);
+    }
+
+    .split-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-block-end: 0.15rem;
+    }
+
+    .split-val {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .maint-box {
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      border-inline-start: 3px solid var(--accent);
+      background-color: var(--surface-alt);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-block-end: 0.875rem;
+      font-size: 0.875rem;
+    }
+
+    .maint-box[hidden] {
+      display: none;
+    }
+
+    .table-wrapper {
+      overflow: auto;
+      max-inline-size: 100%;
+      container-type: inline-size;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-block-end: 1rem;
+    }
+
+    table {
+      inline-size: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.875rem;
+    }
+
+    caption {
+      text-align: start;
+      padding: 0.55rem 0.75rem;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: var(--text);
+      background-color: var(--surface-alt);
+      border-block-end: 1px solid var(--border);
+    }
+
+    th,
+    td {
+      padding: 0.5rem 0.7rem;
+      border-block-end: 1px solid var(--border-soft);
+      text-align: start;
+      vertical-align: top;
+    }
+
+    thead th {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      background-color: var(--surface-alt);
+      border-block-end: 1px solid var(--border);
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 1;
+    }
+
+    tbody th {
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--surface-stripe);
+    }
+
+    .num {
+      text-align: end;
+      white-space: nowrap;
+    }
+
+    tfoot th,
+    tfoot td {
+      font-weight: 800;
+      border-block-start: 1px solid var(--border);
+      border-block-end: 0;
+      background-color: var(--surface-alt);
+    }
+
+    .row-muted {
+      color: var(--muted);
+    }
+
+    @container (width < 380px) {
+      table,
+      thead,
+      tbody,
+      tfoot,
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        padding: 0.5rem 0.75rem;
+        border-block-end: 1px solid var(--border);
+      }
+
+      tbody tr:last-child {
+        border-block-end: 0;
+      }
+
+      tbody th,
+      tbody td {
+        padding: 0.2rem 0;
+        border-block-end: 0;
+      }
+
+      tbody th {
+        font-size: 0.92rem;
+        margin-block-end: 0.15rem;
+      }
+
+      .num {
+        text-align: start;
+      }
+
+      table {
+        --label-2: "Detalhe";
+        --label-3: "Valor";
+      }
+
+      tbody td:nth-child(2)::before {
+        content: var(--label-2) ": ";
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      tbody td:nth-child(3)::before {
+        content: var(--label-3) ": ";
+        font-family: var(--font-sans);
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      tfoot tr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 0.75rem;
+        background-color: var(--surface-alt);
+        border-block-start: 1px solid var(--border);
+      }
+
+      tfoot th,
+      tfoot td {
+        padding: 0;
+        border-block-start: 0;
+        border-block-end: 0;
+      }
+
+      .tfoot-spacer {
+        display: none;
+      }
+    }
+
+    button {
+      font: inherit;
+      font-size: max(1rem, 1em);
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-block-size: 44px;
+      padding: 0.625rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background-color 0.12s ease, border-color 0.12s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--cta);
+      border-color: var(--cta-hover);
+      color: var(--cta-text);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--cta-hover);
+    }
+
+    .btn-secondary {
+      inline-size: 100%;
+      background-color: var(--surface-alt);
+      color: var(--text);
+      border-color: var(--input-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .btn-ghost {
+      background-color: var(--surface);
+      color: var(--accent);
+      border-color: var(--border);
+      min-block-size: 36px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.84rem;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      background-color: var(--accent-soft);
+    }
+
+    .accordion-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    details.config-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+    }
+
+    details.config-panel > summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.65rem 0.9rem;
+      min-block-size: 44px;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      background-color: var(--surface-alt);
+      border-radius: var(--radius-sm);
+    }
+
+    details.config-panel[open] > summary {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+      border-block-end: 1px solid var(--border);
+    }
+
+    details.config-panel > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.config-panel > summary::before {
+      content: "";
+      inline-size: 0.55rem;
+      block-size: 0.55rem;
+      flex-shrink: 0;
+      border-inline-end: 2px solid currentColor;
+      border-block-end: 2px solid currentColor;
+      transform: rotate(-45deg);
+      margin-inline-end: 0.25rem;
+    }
+
+    details.config-panel[open] > summary::before {
+      transform: rotate(45deg);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      details.config-panel > summary::before {
+        transition: transform 0.2s ease;
+      }
+
+      details.config-panel::details-content {
+        interpolate-size: allow-keywords;
+        overflow: clip;
+        contain: layout;
+        transition: block-size 0.25s ease, content-visibility 0.25s allow-discrete, display 0.25s allow-discrete;
+      }
+
+      details.config-panel:not([open])::details-content {
+        block-size: 0;
+      }
+    }
+
+    .details-body {
+      padding: 1rem;
+    }
+
+    .config-subhead {
+      margin: 1.15rem 0 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .config-subhead:first-child {
+      margin-block-start: 0;
+    }
+
+    .pkg-config-box {
+      padding: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background-color: var(--surface-alt);
+      margin-block-end: 0.85rem;
+    }
+
+    .pkg-config-title {
+      margin: 0 0 0.6rem;
+      font-weight: 700;
+      font-size: 0.9375rem;
+    }
+
+    .details-actions {
+      margin-block-start: 0.95rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .badge-warn {
+      display: inline-block;
+      padding: 0.12rem 0.45rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 700;
+      background-color: var(--warn-bg);
+      color: var(--warn-text);
+      border: 1px solid var(--warn-border);
+    }
+
+    .badge-warn[hidden] {
+      display: none;
+    }
+
+    .app-footer {
+      grid-column: 1 / -1;
+      margin: 0.25rem 0 0;
+      padding-block-start: 0.75rem;
+      border-block-start: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .feedback-stack {
+      position: fixed;
+      inset-inline: 0.75rem;
+      inset-block-end: calc(5.2rem + env(safe-area-inset-bottom, 0px));
+      max-inline-size: 46rem;
+      margin-inline: auto;
+      z-index: 45;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    .feedback-banner {
+      pointer-events: auto;
+      padding: 0.7rem 0.95rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      border-inline-start-width: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: var(--bar-shadow);
+    }
+
+    .feedback-banner[hidden] {
+      display: none;
+    }
+
+    .feedback-success {
+      background-color: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+    }
+
+    .feedback-error {
+      background-color: var(--error-bg);
+      border-color: var(--error-border);
+      color: var(--error-text);
+    }
+
+    .sticky-bar {
+      position: fixed;
+      inset-inline: 0;
+      inset-block-end: 0;
+      z-index: 50;
+      background-color: var(--surface);
+      border-block-start: 1px solid var(--border);
+      box-shadow: var(--bar-shadow);
+      padding: 0.55rem 1rem calc(0.55rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .sticky-bar-inner {
+      max-inline-size: 74rem;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .bar-summary {
+      min-inline-size: 0;
+    }
+
+    .bar-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .bar-total {
+      display: block;
+      font-size: clamp(1.15rem, 1rem + 0.65vw, 1.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .bar-sub {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sticky-bar .btn-primary {
+      flex-shrink: 0;
+      padding-inline: 1.15rem;
+    }
+
+    @media (pointer: coarse) {
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      textarea,
+      .stepper-btn,
+      .btn-primary,
+      .btn-secondary,
+      .choice-item,
+      .choice-label,
+      details.config-panel > summary {
+        min-block-size: 52px;
+      }
+
+      .btn-ghost {
+        min-block-size: 44px;
+      }
+    }
+
+    @media (forced-colors: active) {
+      .topbar,
+      .page-subheader,
+      .card,
+      .package-card,
+      .choice-grid,
+      .split-grid,
+      .table-wrapper,
+      details.config-panel,
+      .sticky-bar {
+        border: 1px solid CanvasText;
+        box-shadow: none;
+      }
+
+      .topbar-nav a:hover,
+      .topbar-nav a:focus-visible {
+        border: 1px solid LinkText;
+      }
+
+      .package-card.is-selected,
+      .choice-item:has(.choice-input:checked),
+      .choice-item.is-included {
+        border: 2px solid Highlight;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-ghost,
+      .stepper-btn {
+        border: 1px solid ButtonBorder;
+      }
+    }
+  </style>
+  <script id="jspdf-script" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link visually-hidden">Ir para o conteúdo principal</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-lockup">
+        <svg class="brand-mark" viewBox="0 0 48 48" width="36" height="36" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="alpha-brand-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#14558f"/>
+              <stop offset="100%" stop-color="#0d2b4e"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="44" height="44" rx="7" fill="url(#alpha-brand-bg)"/>
+          <rect class="brand-badge-rim" x="2.75" y="2.75" width="42.5" height="42.5" rx="6.25" fill="none" stroke-width="1.5"/>
+          <path d="M24 10.5 L36.5 36.5 L31 36.5 L24 21.2 L17 36.5 L11.5 36.5 Z" fill="#ffffff"/>
+          <rect x="19.5" y="31.2" width="9" height="3.6" rx="1" fill="#cbd5e1"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name" id="brand-name">Alpha <span class="brand-name-accent">System</span></span>
+          <span class="brand-cnpj mono" id="brand-cnpj">CNPJ 52.774.027/0001-35</span>
+        </div>
+      </div>
+
+      <nav class="topbar-nav" aria-label="Navegação das seções">
+        <a href="#sec-site">Escopo</a>
+        <a href="#sec-cliente">Cliente</a>
+        <a href="#sec-config">Configurações</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-subheader">
+    <div class="page-subheader-inner">
+      <div>
+        <p class="breadcrumb">Sistema Comercial / Orçamentos e Contratos</p>
+        <h1>Orçamento de Desenvolvimento de Site</h1>
+        <p class="subheader-desc">Configure o escopo, preencha os dados do cliente e emita o contrato em PDF.</p>
+      </div>
+      <span class="sys-meta">Dados salvos localmente</span>
+    </div>
+  </div>
+
+  <main id="conteudo-principal" tabindex="-1" class="layout">
+    <section id="sec-site" class="card" aria-labelledby="titulo-site">
+      <div class="card-header">
+        <h2 id="titulo-site">1. Especificação do site</h2>
+      </div>
+      <div class="card-body">
+
+      <fieldset>
+        <legend>Tipo de site (pacotes fechados)</legend>
+        <p class="fieldset-hint">Ao escolher um pacote, os itens inclusos aparecem abaixo e não são cobrados nos extras.</p>
+        <div id="packages-container" class="package-list"></div>
+      </fieldset>
+
+      <div class="field">
+        <label for="extra-pages">Páginas extras</label>
+        <span class="field-hint" id="extra-pages-hint">Além das páginas incluídas.</span>
+        <div class="stepper">
+          <button type="button" id="pages-dec" class="stepper-btn" aria-label="Diminuir páginas extras">−</button>
+          <input type="number" id="extra-pages" name="extraPages" min="0" max="99" step="1" value="0" inputmode="numeric" aria-describedby="extra-pages-hint">
+          <button type="button" id="pages-inc" class="stepper-btn" aria-label="Aumentar páginas extras">+</button>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Porte do cliente</legend>
+        <p class="fieldset-hint">Multiplicador aplicado sobre o subtotal (pacote base + páginas extras + extras cobrados).</p>
+        <div class="choice-grid choice-grid-3">
+          <div class="choice-item">
+            <input class="choice-input" type="radio" id="porte-micro" name="porte" value="micro" checked>
+            <label class="choice-label" for="porte-micro">
+              <span class="choice-text">Micro</span>
+              <span class="choice-meta mono" id="badge-mult-micro">1,0×</span>
+            </label>
+          </div>
+          <div class="choice-item">
+            <input class="choice-input" type="radio" id="porte-medio" name="porte" value="medio">
+            <label class="choice-label" for="porte-medio">
+              <span class="choice-text">Médio</span>
+              <span class="choice-meta mono" id="badge-mult-medio">1,3×</span>
+            </label>
+          </div>
+          <div class="choice-item">
+            <input class="choice-input" type="radio" id="porte-maior" name="porte" value="maior">
+            <label class="choice-label" for="porte-maior">
+              <span class="choice-text">Maior</span>
+              <span class="choice-meta mono" id="badge-mult-maior">1,6×</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Extras (só o que não está no pacote)</legend>
+        <div class="choice-grid">
+          <div class="choice-item" id="item-extra-galeria">
+            <input class="choice-input" type="checkbox" id="extra-galeria" name="extras" value="galeria">
+            <label class="choice-label" for="extra-galeria">
+              <span class="choice-text">Galeria de projetos</span>
+              <span class="choice-meta mono" id="badge-galeria">+ R$ 200,00 • +1 dia</span>
+            </label>
+          </div>
+          <div class="choice-item" id="item-extra-blog">
+            <input class="choice-input" type="checkbox" id="extra-blog" name="extras" value="blog">
+            <label class="choice-label" for="extra-blog">
+              <span class="choice-text">Blog</span>
+              <span class="choice-meta mono" id="badge-blog">+ R$ 300,00 • +2 dias</span>
+            </label>
+          </div>
+          <div class="choice-item" id="item-extra-seoLocal">
+            <input class="choice-input" type="checkbox" id="extra-seo" name="extras" value="seoLocal">
+            <label class="choice-label" for="extra-seo">
+              <span class="choice-text">SEO local básico</span>
+              <span class="choice-meta mono" id="badge-seoLocal">+ R$ 300,00 • +1 dia</span>
+            </label>
+          </div>
+          <div class="choice-item" id="item-extra-catalogo">
+            <input class="choice-input" type="checkbox" id="extra-catalogo" name="extras" value="catalogo">
+            <label class="choice-label" for="extra-catalogo">
+              <span class="choice-text">Catálogo com pedido de orçamento</span>
+              <span class="choice-meta mono" id="badge-catalogo">+ R$ 500,00 • +3 dias</span>
+            </label>
+          </div>
+          <div class="choice-item" id="item-extra-logo">
+            <input class="choice-input" type="checkbox" id="extra-logo" name="extras" value="logo">
+            <label class="choice-label" for="extra-logo">
+              <span class="choice-text">Logo simples</span>
+              <span class="choice-meta mono" id="badge-logo">+ R$ 300,00 • +2 dias</span>
+            </label>
+          </div>
+          <div class="choice-item" id="item-extra-textos">
+            <input class="choice-input" type="checkbox" id="extra-textos" name="extras" value="textos">
+            <label class="choice-label" for="extra-textos">
+              <span class="choice-text">Textos escritos por mim</span>
+              <span class="choice-meta mono" id="badge-textos">+ R$ 300,00 • +2 dias</span>
+            </label>
+          </div>
+          <div class="choice-item" id="item-extra-dominio">
+            <input class="choice-input" type="checkbox" id="extra-dominio" name="extras" value="dominio">
+            <label class="choice-label" for="extra-dominio">
+              <span class="choice-text">Domínio e hospedagem configurados</span>
+              <span class="choice-meta mono" id="badge-dominio">+ R$ 100,00 • +0 dia</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Prazo e manutenção</legend>
+        <div class="choice-grid">
+          <div class="choice-item">
+            <input class="choice-input" type="checkbox" id="opt-urgencia" name="urgencia">
+            <label class="choice-label" for="opt-urgencia">
+              <span class="choice-text" id="label-urgencia-text">Urgência (reduz prazo em -30%)</span>
+              <span class="choice-meta mono" id="badge-urgencia">+30% no preço</span>
+            </label>
+          </div>
+          <div class="choice-item">
+            <input class="choice-input" type="checkbox" id="opt-manutencao" name="manutencao">
+            <label class="choice-label" for="opt-manutencao">
+              <span class="choice-text">Manutenção / hospedagem mensal (à parte)</span>
+              <span class="choice-meta mono" id="badge-manutencao">R$ 120,00/mês</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+      </div>
+    </section>
+
+    <aside id="sec-resultado" class="card" aria-labelledby="titulo-resultado">
+      <div class="card-header">
+        <h2 id="titulo-resultado">Resumo do orçamento</h2>
+      </div>
+      <div class="card-body">
+
+      <div id="config-warning" class="warn-box" role="status" aria-live="polite" hidden></div>
+
+      <div id="summary-pkg" class="summary-pkg">
+        <div class="summary-pkg-top">
+          <span id="sum-pkg-name" class="summary-pkg-name">Landing Page</span>
+          <strong id="sum-pkg-price" class="mono">R$ 800,00</strong>
+        </div>
+        <p id="sum-pkg-meta" class="summary-pkg-meta">1 página • Prazo do pacote: 5 a 7 dias corridos</p>
+        <span class="includes-heading">O que está incluso no pacote</span>
+        <ul id="sum-pkg-list" class="check-list" role="list"></ul>
+      </div>
+
+      <div class="total-box">
+        <span class="total-kicker">Total do projeto</span>
+        <output id="result-total" class="total-value mono">R$ 800,00</output>
+        <p id="result-deadline" class="total-deadline">Prazo estimado: 5 a 7 dias corridos</p>
+        <p id="result-deadline-note" class="total-deadline-note">Contados após receber todo o material e a entrada.</p>
+      </div>
+
+      <div class="split-grid">
+        <div class="split-card">
+          <span class="split-label">Entrada (50% aprovação)</span>
+          <strong id="result-entrada" class="split-val mono">R$ 400,00</strong>
+        </div>
+        <div class="split-card">
+          <span class="split-label">Restante (50% entrega)</span>
+          <strong id="result-entrega" class="split-val mono">R$ 400,00</strong>
+        </div>
+      </div>
+
+      <div id="result-manutencao-box" class="maint-box" hidden>
+        <span>Manutenção / hospedagem mensal (à parte)</span>
+        <strong id="result-manutencao" class="mono">R$ 120,00/mês</strong>
+      </div>
+
+      <div tabindex="0" role="region" aria-labelledby="composicao-caption" class="table-wrapper">
+        <table>
+          <caption id="composicao-caption">Composição do orçamento</caption>
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Detalhe</th>
+              <th scope="col" class="num">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Pacote base</th>
+              <td id="det-base">Landing Page (1 página)</td>
+              <td id="val-base" class="mono num">R$ 800,00</td>
+            </tr>
+            <tr id="row-paginas" class="row-muted">
+              <th scope="row">Páginas extras</th>
+              <td id="det-paginas">Nenhuma página extra</td>
+              <td id="val-paginas" class="mono num">R$ 0,00</td>
+            </tr>
+            <tr id="row-extras" class="row-muted">
+              <th scope="row">Extras cobrados</th>
+              <td id="det-extras">Nenhum extra cobrado</td>
+              <td id="val-extras" class="mono num">R$ 0,00</td>
+            </tr>
+            <tr id="row-porte" class="row-muted">
+              <th scope="row">Porte</th>
+              <td id="det-porte">Micro (1,0×)</td>
+              <td id="val-porte" class="mono num">R$ 0,00</td>
+            </tr>
+            <tr id="row-urgencia" class="row-muted">
+              <th scope="row">Urgência</th>
+              <td id="det-urgencia">Não aplicada</td>
+              <td id="val-urgencia" class="mono num">R$ 0,00</td>
+            </tr>
+            <tr id="row-piso" class="row-muted">
+              <th scope="row">Ajuste ao piso</th>
+              <td id="det-piso">Piso R$ 800,00 atendido</td>
+              <td id="val-piso" class="mono num">R$ 0,00</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row">Total</th>
+              <td class="tfoot-spacer"></td>
+              <td id="val-total-tabela" class="mono num">R$ 800,00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <button type="button" id="copy-proposal-btn" class="btn-secondary">Copiar proposta para WhatsApp</button>
+      </div>
+    </aside>
+
+    <section id="sec-cliente" class="card" aria-labelledby="titulo-cliente">
+      <div class="card-header">
+        <h2 id="titulo-cliente">2. Dados do cliente</h2>
+        <button type="button" id="clear-client-btn" class="btn-ghost">Limpar</button>
+      </div>
+      <div class="card-body">
+        <p class="section-lead">Único bloco que você preenche a cada contrato. Campos com <span class="req-mark">*</span> são obrigatórios.</p>
+
+      <form id="contract-form" novalidate>
+        <div class="field-grid field-grid-2">
+          <div class="field field-span-2">
+            <label for="client-name">Nome / Razão social <span class="req-mark" aria-hidden="true">*</span></label>
+            <input type="text" id="client-name" name="clientName" required autocomplete="name" enterkeyhint="next" data-error="client-name-error" placeholder="Ex.: Padaria Pão Dourado Ltda ou Maria Silva">
+            <span id="client-name-error" class="error-msg">Informe o nome ou razão social do cliente.</span>
+          </div>
+
+          <div class="field">
+            <label for="client-doc">CPF / CNPJ <span class="req-mark" aria-hidden="true">*</span></label>
+            <input type="text" id="client-doc" name="clientDoc" required inputmode="numeric" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="next" data-error="client-doc-error" placeholder="000.000.000-00 ou 00.000.000/0001-00">
+            <span id="client-doc-error" class="error-msg">Informe o CPF ou CNPJ do cliente.</span>
+          </div>
+
+          <div class="field">
+            <label for="client-segment">Segmento</label>
+            <input type="text" id="client-segment" name="clientSegment" enterkeyhint="next" placeholder="Ex.: Odontologia, Advocacia, Restaurante">
+          </div>
+
+          <div class="field field-span-2">
+            <label for="client-address">Endereço</label>
+            <input type="text" id="client-address" name="clientAddress" autocomplete="street-address" enterkeyhint="next" placeholder="Rua, número, complemento, bairro, cidade/UF, CEP">
+          </div>
+
+          <div class="field">
+            <label for="client-email">E-mail</label>
+            <input type="email" id="client-email" name="clientEmail" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="next" data-error="client-email-error" placeholder="contato@cliente.com.br">
+            <span id="client-email-error" class="error-msg">Informe um e-mail válido ou deixe o campo em branco.</span>
+          </div>
+
+          <div class="field">
+            <label for="client-phone">Telefone / WhatsApp</label>
+            <input type="tel" id="client-phone" name="clientPhone" autocomplete="tel" enterkeyhint="done" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+      </form>
+      </div>
+    </section>
+
+    <section id="sec-config" class="card" aria-labelledby="titulo-config">
+      <div class="card-header">
+        <h2 id="titulo-config">3. Preços, pacotes, fidelidade e meus dados</h2>
+      </div>
+      <div class="card-body">
+        <p class="section-lead">Valores, prazos, regras de exclusividade e dados do contratado são salvos automaticamente neste navegador.</p>
+
+      <div class="accordion-group">
+        <details id="details-precos" class="config-panel">
+          <summary>Preços e pacotes (editáveis)</summary>
+          <div class="details-body">
+            <p class="config-subhead">Pacotes fechados</p>
+
+            <div class="pkg-config-box">
+              <p class="pkg-config-title">Pacote 1 — Landing Page</p>
+              <div class="field-grid field-grid-2">
+                <div class="field">
+                  <label for="pkg-landing-nome">Nome do pacote</label>
+                  <input type="text" id="pkg-landing-nome">
+                </div>
+                <div class="field">
+                  <label for="pkg-landing-preco">Preço base (R$)</label>
+                  <input type="number" id="pkg-landing-preco" class="mono" min="0" step="10" inputmode="decimal">
+                </div>
+                <div class="field">
+                  <label for="pkg-landing-min">Prazo mínimo (dias)</label>
+                  <input type="number" id="pkg-landing-min" class="mono" min="1" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                  <label for="pkg-landing-max">Prazo máximo (dias)</label>
+                  <input type="number" id="pkg-landing-max" class="mono" min="1" step="1" inputmode="numeric">
+                </div>
+                <div class="field field-span-2">
+                  <label for="pkg-landing-paginas">Páginas incluídas</label>
+                  <input type="text" id="pkg-landing-paginas">
+                </div>
+                <div class="field field-span-2">
+                  <label for="pkg-landing-itens">O que está incluso (1 item por linha)</label>
+                  <textarea id="pkg-landing-itens" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="pkg-config-box">
+              <p class="pkg-config-title">Pacote 2 — Institucional</p>
+              <div class="field-grid field-grid-2">
+                <div class="field">
+                  <label for="pkg-institucional-nome">Nome do pacote</label>
+                  <input type="text" id="pkg-institucional-nome">
+                </div>
+                <div class="field">
+                  <label for="pkg-institucional-preco">Preço base (R$)</label>
+                  <input type="number" id="pkg-institucional-preco" class="mono" min="0" step="10" inputmode="decimal">
+                </div>
+                <div class="field">
+                  <label for="pkg-institucional-min">Prazo mínimo (dias)</label>
+                  <input type="number" id="pkg-institucional-min" class="mono" min="1" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                  <label for="pkg-institucional-max">Prazo máximo (dias)</label>
+                  <input type="number" id="pkg-institucional-max" class="mono" min="1" step="1" inputmode="numeric">
+                </div>
+                <div class="field field-span-2">
+                  <label for="pkg-institucional-paginas">Páginas incluídas</label>
+                  <input type="text" id="pkg-institucional-paginas">
+                </div>
+                <div class="field field-span-2">
+                  <label for="pkg-institucional-itens">O que está incluso (1 item por linha)</label>
+                  <textarea id="pkg-institucional-itens" rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="pkg-config-box">
+              <p class="pkg-config-title">Pacote 3 — Institucional + Catálogo</p>
+              <div class="field-grid field-grid-2">
+                <div class="field">
+                  <label for="pkg-catalogo-nome">Nome do pacote</label>
+                  <input type="text" id="pkg-catalogo-nome">
+                </div>
+                <div class="field">
+                  <label for="pkg-catalogo-preco">Preço base (R$)</label>
+                  <input type="number" id="pkg-catalogo-preco" class="mono" min="0" step="10" inputmode="decimal">
+                </div>
+                <div class="field">
+                  <label for="pkg-catalogo-min">Prazo mínimo (dias)</label>
+                  <input type="number" id="pkg-catalogo-min" class="mono" min="1" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                  <label for="pkg-catalogo-max">Prazo máximo (dias)</label>
+                  <input type="number" id="pkg-catalogo-max" class="mono" min="1" step="1" inputmode="numeric">
+                </div>
+                <div class="field field-span-2">
+                  <label for="pkg-catalogo-paginas">Páginas incluídas</label>
+                  <input type="text" id="pkg-catalogo-paginas">
+                </div>
+                <div class="field field-span-2">
+                  <label for="pkg-catalogo-itens">O que está incluso (1 item por linha)</label>
+                  <textarea id="pkg-catalogo-itens" rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <p class="config-subhead">Página extra, piso mínimo e manutenção</p>
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="cfg-pagina-extra">Página extra (R$)</label>
+                <input type="number" id="cfg-pagina-extra" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-pagina-extra-dias">Página extra (+ dias)</label>
+                <input type="number" id="cfg-pagina-extra-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-piso-minimo">Piso mínimo (R$)</label>
+                <input type="number" id="cfg-piso-minimo" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-manutencao">Manutenção mensal (R$/mês)</label>
+                <input type="number" id="cfg-manutencao" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+            </div>
+
+            <p class="config-subhead">Extras (preço em R$ e dias adicionais)</p>
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="cfg-galeria">Galeria de projetos (R$)</label>
+                <input type="number" id="cfg-galeria" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-galeria-dias">Galeria (+ dias)</label>
+                <input type="number" id="cfg-galeria-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-blog">Blog (R$)</label>
+                <input type="number" id="cfg-blog" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-blog-dias">Blog (+ dias)</label>
+                <input type="number" id="cfg-blog-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-seo">SEO local básico (R$)</label>
+                <input type="number" id="cfg-seo" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-seo-dias">SEO local (+ dias)</label>
+                <input type="number" id="cfg-seo-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-catalogo">Catálogo com orçamento (R$)</label>
+                <input type="number" id="cfg-catalogo" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-catalogo-dias">Catálogo (+ dias)</label>
+                <input type="number" id="cfg-catalogo-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-logo">Logo simples (R$)</label>
+                <input type="number" id="cfg-logo" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-logo-dias">Logo simples (+ dias)</label>
+                <input type="number" id="cfg-logo-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-textos">Textos escritos por mim (R$)</label>
+                <input type="number" id="cfg-textos" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-textos-dias">Textos (+ dias)</label>
+                <input type="number" id="cfg-textos-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-dominio">Domínio e hospedagem (R$)</label>
+                <input type="number" id="cfg-dominio" class="mono" min="0" step="10" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-dominio-dias">Domínio e hospedagem (+ dias)</label>
+                <input type="number" id="cfg-dominio-dias" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+            </div>
+
+            <p class="config-subhead">Multiplicadores de porte e urgência</p>
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="cfg-mult-micro">Porte micro (multiplicador)</label>
+                <input type="number" id="cfg-mult-micro" class="mono" min="0.1" step="0.1" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-mult-medio">Porte médio (multiplicador)</label>
+                <input type="number" id="cfg-mult-medio" class="mono" min="0.1" step="0.1" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-mult-maior">Porte maior (multiplicador)</label>
+                <input type="number" id="cfg-mult-maior" class="mono" min="0.1" step="0.1" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-urgencia">Urgência: acréscimo no preço (%)</label>
+                <input type="number" id="cfg-urgencia" class="mono" min="0" step="1" inputmode="decimal">
+              </div>
+              <div class="field">
+                <label for="cfg-urgencia-prazo">Urgência: redução no prazo (%)</label>
+                <input type="number" id="cfg-urgencia-prazo" class="mono" min="0" max="90" step="5" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="details-actions">
+              <button type="button" id="reset-prices-btn" class="btn-ghost">Restaurar preços e pacotes padrão</button>
+            </div>
+          </div>
+        </details>
+
+        <details id="details-fidelidade" class="config-panel">
+          <summary>Fidelidade e exclusividade (editáveis)</summary>
+          <div class="details-body">
+            <p class="section-lead">Prazos e percentuais aplicados às cláusulas de vigência, exclusividade, proteção do material e multa.</p>
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="cfg-exclusividade-meses">Prazo de exclusividade de execução (meses)</label>
+                <input type="number" id="cfg-exclusividade-meses" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-confidencialidade-meses">Prazo de confidencialidade após o término (meses)</label>
+                <input type="number" id="cfg-confidencialidade-meses" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-multa-pct">Percentual de multa por descumprimento (%)</label>
+                <span id="cfg-multa-hint" class="field-hint">Aplicada sobre o valor total do projeto (limitada a 100%).</span>
+                <input type="number" id="cfg-multa-pct" class="mono" min="0" max="100" step="1" inputmode="numeric" aria-describedby="cfg-multa-hint">
+              </div>
+              <div class="field">
+                <label for="cfg-fidelidade-meses">Prazo mínimo de fidelidade / vigência (meses)</label>
+                <input type="number" id="cfg-fidelidade-meses" class="mono" min="0" step="1" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="cfg-multa-fidelidade-pct">Multa por quebra da fidelidade (%)</label>
+                <span id="cfg-multa-fidelidade-hint" class="field-hint">Aplicada proporcionalmente ao período restante da fidelidade.</span>
+                <input type="number" id="cfg-multa-fidelidade-pct" class="mono" min="0" max="100" step="1" inputmode="numeric" aria-describedby="cfg-multa-fidelidade-hint">
+              </div>
+            </div>
+            <div class="details-actions">
+              <button type="button" id="reset-fidelity-btn" class="btn-ghost">Restaurar fidelidade padrão</button>
+            </div>
+          </div>
+        </details>
+
+        <details id="details-contratado" class="config-panel">
+          <summary>
+            <span>Meus dados (Contratado)</span>
+            <span id="pending-contractor-badge" class="badge-warn" hidden></span>
+          </summary>
+          <div class="details-body">
+            <p class="section-lead">Substitua os campos marcados com <code>[PREENCHER]</code> pelos seus dados reais ou apague os opcionais para omiti-los no PDF.</p>
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="me-fantasia">Nome fantasia</label>
+                <input type="text" id="me-fantasia" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="me-cnpj">CNPJ</label>
+                <input type="text" id="me-cnpj" inputmode="numeric" autocorrect="off" autocapitalize="none" spellcheck="false">
+              </div>
+              <div class="field field-span-2">
+                <label for="me-endereco">Endereço comercial</label>
+                <input type="text" id="me-endereco" autocomplete="street-address">
+              </div>
+              <div class="field">
+                <label for="me-email">E-mail</label>
+                <input type="email" id="me-email" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false">
+              </div>
+              <div class="field">
+                <label for="me-telefone">Telefone / WhatsApp</label>
+                <input type="tel" id="me-telefone" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="me-pix">Chave Pix</label>
+                <span id="me-pix-hint" class="field-hint">Aparece na cláusula de pagamento; se ficar vazia, será omitida.</span>
+                <input type="text" id="me-pix" aria-describedby="me-pix-hint" autocorrect="off" autocapitalize="none" spellcheck="false">
+              </div>
+              <div class="field">
+                <label for="me-foro">Foro</label>
+                <input type="text" id="me-foro">
+              </div>
+            </div>
+            <div class="details-actions">
+              <button type="button" id="reset-contractor-btn" class="btn-ghost">Restaurar meus dados padrão</button>
+            </div>
+          </div>
+        </details>
+      </div>
+      </div>
+    </section>
+
+    <p class="app-footer"><span id="footer-brand">Alpha System — CNPJ 52.774.027/0001-35</span> • Sistema de Orçamentos e Contratos</p>
+  </main>
+
+  <div class="feedback-stack">
+    <div id="status-msg" class="feedback-banner feedback-success" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+    <div id="alert-msg" class="feedback-banner feedback-error" role="alert" aria-live="assertive" aria-atomic="true" hidden></div>
+  </div>
+
+  <footer class="sticky-bar" aria-label="Resumo e geração do contrato">
+    <div class="sticky-bar-inner">
+      <div class="bar-summary">
+        <span class="bar-label">Total</span>
+        <strong id="bar-total" class="bar-total mono">R$ 800,00</strong>
+        <span id="bar-sub" class="bar-sub">Entrada 50%: R$ 400,00</span>
+      </div>
+      <button type="submit" form="contract-form" id="generate-pdf-btn" class="btn-primary">Gerar contrato PDF</button>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const STORAGE_KEYS = {
+        prices: 'frelacalc_precos_pacotes_v2',
+        fidelity: 'frelacalc_fidelidade_v1',
+        contractor: 'frelacalc_contratado_v1'
+      };
+
+      const PACKAGE_IDS = ['landing', 'institucional', 'catalogo'];
+
+      const LANDING_ITENS = [
+        'Layout responsivo (celular e computador)',
+        'Botão de WhatsApp',
+        'Formulário de contato',
+        'Mapa e localização',
+        'SEO básico (título, descrição)',
+        'Publicação no ar',
+        '2 rodadas de revisão',
+        '30 dias de suporte'
+      ];
+
+      const INSTITUCIONAL_ITENS = [
+        ...LANDING_ITENS,
+        'Menu de navegação',
+        'Galeria de projetos',
+        'SEO local básico'
+      ];
+
+      const CATALOGO_ITENS = [
+        ...INSTITUCIONAL_ITENS,
+        'Catálogo de produtos com pedido de orçamento por WhatsApp',
+        'Cadastro no Google Meu Negócio'
+      ];
+
+      const DEFAULT_PACKAGES = {
+        landing: {
+          id: 'landing',
+          nome: 'Landing Page',
+          preco: 800,
+          prazoMin: 5,
+          prazoMax: 7,
+          paginasIncluidas: '1 página',
+          includedExtras: [],
+          itens: LANDING_ITENS
+        },
+        institucional: {
+          id: 'institucional',
+          nome: 'Institucional',
+          preco: 1500,
+          prazoMin: 7,
+          prazoMax: 10,
+          paginasIncluidas: 'até 5 páginas (início, sobre, serviços, contato e mais uma)',
+          includedExtras: ['galeria', 'seoLocal'],
+          itens: INSTITUCIONAL_ITENS
+        },
+        catalogo: {
+          id: 'catalogo',
+          nome: 'Institucional + Catálogo',
+          preco: 2200,
+          prazoMin: 10,
+          prazoMax: 14,
+          paginasIncluidas: 'até 8 páginas',
+          includedExtras: ['galeria', 'seoLocal', 'catalogo'],
+          itens: CATALOGO_ITENS
+        }
+      };
+
+      function cloneDefaultPackages() {
+        const out = {};
+        for (const id of PACKAGE_IDS) {
+          out[id] = {
+            ...DEFAULT_PACKAGES[id],
+            includedExtras: [...DEFAULT_PACKAGES[id].includedExtras],
+            itens: [...DEFAULT_PACKAGES[id].itens]
+          };
+        }
+        return out;
+      }
+
+      const DEFAULT_PRICES = {
+        paginaExtra: 200,
+        paginaExtraDias: 1,
+        galeria: 200,
+        galeriaDias: 1,
+        blog: 300,
+        blogDias: 2,
+        seoLocal: 300,
+        seoLocalDias: 1,
+        catalogo: 500,
+        catalogoDias: 3,
+        logo: 300,
+        logoDias: 2,
+        textos: 300,
+        textosDias: 2,
+        dominio: 100,
+        dominioDias: 0,
+        multMicro: 1.0,
+        multMedio: 1.3,
+        multMaior: 1.6,
+        urgenciaPct: 30,
+        urgenciaReducaoPrazoPct: 30,
+        pisoMinimo: 800,
+        manutencao: 120
+      };
+
+      const DEFAULT_CONTRACTOR = Object.freeze({
+        nomeFantasia: 'Alpha System',
+        cnpj: '52.774.027/0001-35',
+        endereco: 'Rua Fausto Domingues, 211, Jardim Fontalis, São Paulo/SP, CEP 02360-020',
+        email: 'eusantoslucas@hotmail.com',
+        telefone: '(11) 91353-0262',
+        chavePix: '52774027000135',
+        foro: 'São Paulo/SP'
+      });
+
+      const DEFAULT_FIDELITY = Object.freeze({
+        exclusividadeMeses: 12,
+        confidencialidadeMeses: 24,
+        multaPct: 30,
+        fidelidadeMeses: 12,
+        multaFidelidadePct: 30
+      });
+
+      const FIDELITY_FIELDS = [
+        { key: 'exclusividadeMeses', id: 'cfg-exclusividade-meses', min: 0, integer: true },
+        { key: 'confidencialidadeMeses', id: 'cfg-confidencialidade-meses', min: 0, integer: true },
+        { key: 'multaPct', id: 'cfg-multa-pct', min: 0, max: 100, integer: true },
+        { key: 'fidelidadeMeses', id: 'cfg-fidelidade-meses', min: 0, integer: true },
+        { key: 'multaFidelidadePct', id: 'cfg-multa-fidelidade-pct', min: 0, max: 100, integer: true }
+      ];
+
+      const EXTRA_DEFS = [
+        { key: 'galeria', diasKey: 'galeriaDias', inputId: 'extra-galeria', itemId: 'item-extra-galeria', badgeId: 'badge-galeria', label: 'Galeria de projetos', contractDesc: 'Galeria de projetos para exposição visual de trabalhos ou serviços' },
+        { key: 'blog', diasKey: 'blogDias', inputId: 'extra-blog', itemId: 'item-extra-blog', badgeId: 'badge-blog', label: 'Blog', contractDesc: 'Estrutura de blog para publicação e gerenciamento de artigos' },
+        { key: 'seoLocal', diasKey: 'seoLocalDias', inputId: 'extra-seo', itemId: 'item-extra-seoLocal', badgeId: 'badge-seoLocal', label: 'SEO local básico', contractDesc: 'Configuração inicial de SEO local básico (títulos, descrições e dados estruturados locais)' },
+        { key: 'catalogo', diasKey: 'catalogoDias', inputId: 'extra-catalogo', itemId: 'item-extra-catalogo', badgeId: 'badge-catalogo', label: 'Catálogo com pedido de orçamento', contractDesc: 'Catálogo de produtos ou serviços com formulário/botão de pedido de orçamento' },
+        { key: 'logo', diasKey: 'logoDias', inputId: 'extra-logo', itemId: 'item-extra-logo', badgeId: 'badge-logo', label: 'Logo simples', contractDesc: 'Criação de logotipo simples em versão digital básica' },
+        { key: 'textos', diasKey: 'textosDias', inputId: 'extra-textos', itemId: 'item-extra-textos', badgeId: 'badge-textos', label: 'Textos escritos por mim', contractDesc: 'Redação básica de textos institucionais e chamadas para as páginas contratadas' },
+        { key: 'dominio', diasKey: 'dominioDias', inputId: 'extra-dominio', itemId: 'item-extra-dominio', badgeId: 'badge-dominio', label: 'Domínio e hospedagem configurados', contractDesc: 'Configuração técnica inicial de apontamento de domínio e ambiente de hospedagem em nome do CONTRATANTE' }
+      ];
+
+      const PRICE_FIELDS = [
+        { key: 'paginaExtra', id: 'cfg-pagina-extra', min: 0 },
+        { key: 'paginaExtraDias', id: 'cfg-pagina-extra-dias', min: 0, integer: true },
+        { key: 'pisoMinimo', id: 'cfg-piso-minimo', min: 0 },
+        { key: 'manutencao', id: 'cfg-manutencao', min: 0 },
+        { key: 'galeria', id: 'cfg-galeria', min: 0 },
+        { key: 'galeriaDias', id: 'cfg-galeria-dias', min: 0, integer: true },
+        { key: 'blog', id: 'cfg-blog', min: 0 },
+        { key: 'blogDias', id: 'cfg-blog-dias', min: 0, integer: true },
+        { key: 'seoLocal', id: 'cfg-seo', min: 0 },
+        { key: 'seoLocalDias', id: 'cfg-seo-dias', min: 0, integer: true },
+        { key: 'catalogo', id: 'cfg-catalogo', min: 0 },
+        { key: 'catalogoDias', id: 'cfg-catalogo-dias', min: 0, integer: true },
+        { key: 'logo', id: 'cfg-logo', min: 0 },
+        { key: 'logoDias', id: 'cfg-logo-dias', min: 0, integer: true },
+        { key: 'textos', id: 'cfg-textos', min: 0 },
+        { key: 'textosDias', id: 'cfg-textos-dias', min: 0, integer: true },
+        { key: 'dominio', id: 'cfg-dominio', min: 0 },
+        { key: 'dominioDias', id: 'cfg-dominio-dias', min: 0, integer: true },
+        { key: 'multMicro', id: 'cfg-mult-micro', min: 0.1 },
+        { key: 'multMedio', id: 'cfg-mult-medio', min: 0.1 },
+        { key: 'multMaior', id: 'cfg-mult-maior', min: 0.1 },
+        { key: 'urgenciaPct', id: 'cfg-urgencia', min: 0 },
+        { key: 'urgenciaReducaoPrazoPct', id: 'cfg-urgencia-prazo', min: 0, max: 90, integer: true }
+      ];
+
+      const CONTRACTOR_FIELDS = [
+        { key: 'nomeFantasia', id: 'me-fantasia' },
+        { key: 'cnpj', id: 'me-cnpj' },
+        { key: 'endereco', id: 'me-endereco' },
+        { key: 'email', id: 'me-email' },
+        { key: 'telefone', id: 'me-telefone' },
+        { key: 'chavePix', id: 'me-pix' },
+        { key: 'foro', id: 'me-foro' }
+      ];
+
+      const BRL_FORMATTER = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+
+      const round2 = (n) => Math.round((n + Number.EPSILON) * 100) / 100;
+      const formatBRL = (value) => BRL_FORMATTER.format(round2(Number(value) || 0)).replace(/\u00A0/g, ' ');
+      const formatMult = (value) => `${Number(value).toFixed(1).replace('.', ',')}×`;
+      const formatDiasLabel = (n) => `${n} ${n <= 1 ? 'dia' : 'dias'}`;
+
+      function cleanOptional(value) {
+        const trimmed = String(value == null ? '' : value).trim();
+        if (!trimmed || trimmed.toUpperCase() === '[PREENCHER]') {
+          return '';
+        }
+        return trimmed;
+      }
+
+      function sanitizeSinglePackage(id, rawPkg) {
+        const def = DEFAULT_PACKAGES[id];
+        const pkg = {
+          id,
+          nome: def.nome,
+          preco: def.preco,
+          prazoMin: def.prazoMin,
+          prazoMax: def.prazoMax,
+          paginasIncluidas: def.paginasIncluidas,
+          includedExtras: [...def.includedExtras],
+          itens: [...def.itens]
+        };
+        if (!rawPkg || typeof rawPkg !== 'object') return pkg;
+
+        if (typeof rawPkg.nome === 'string') pkg.nome = rawPkg.nome;
+        if (typeof rawPkg.paginasIncluidas === 'string') pkg.paginasIncluidas = rawPkg.paginasIncluidas;
+
+        if (rawPkg.preco === null) {
+          pkg.preco = null;
+        } else if (rawPkg.preco !== undefined) {
+          const p = Number(rawPkg.preco);
+          if (Number.isFinite(p) && p >= 0) pkg.preco = round2(p);
+        }
+
+        if (rawPkg.prazoMin === null) {
+          pkg.prazoMin = null;
+        } else if (rawPkg.prazoMin !== undefined) {
+          const dMin = Number(rawPkg.prazoMin);
+          if (Number.isFinite(dMin) && dMin >= 1) pkg.prazoMin = Math.round(dMin);
+        }
+
+        if (rawPkg.prazoMax === null) {
+          pkg.prazoMax = null;
+        } else if (rawPkg.prazoMax !== undefined) {
+          const dMax = Number(rawPkg.prazoMax);
+          if (Number.isFinite(dMax) && dMax >= 1) pkg.prazoMax = Math.round(dMax);
+        }
+
+        if (Array.isArray(rawPkg.itens)) {
+          pkg.itens = rawPkg.itens.map((x) => String(x || '').trim()).filter(Boolean);
+        }
+
+        return pkg;
+      }
+
+      function createDefaultPriceState() {
+        return {
+          ...DEFAULT_PRICES,
+          packages: cloneDefaultPackages()
+        };
+      }
+
+      function sanitizePrices(raw) {
+        const merged = createDefaultPriceState();
+        if (!raw || typeof raw !== 'object') return merged;
+        for (const field of PRICE_FIELDS) {
+          const val = Number(raw[field.key]);
+          if (Number.isFinite(val) && val >= field.min) {
+            const clamped = field.max !== undefined ? Math.min(field.max, val) : val;
+            merged[field.key] = field.integer ? Math.round(clamped) : round2(clamped);
+          }
+        }
+        if (raw.packages && typeof raw.packages === 'object') {
+          for (const id of PACKAGE_IDS) {
+            merged.packages[id] = sanitizeSinglePackage(id, raw.packages[id]);
+          }
+        }
+        return merged;
+      }
+
+      function sanitizeContractor(raw) {
+        const merged = { ...DEFAULT_CONTRACTOR };
+        if (!raw || typeof raw !== 'object') return merged;
+        const oldWrongAddress = 'Estrada Velha da Penha, 356, conj 05, Tatuapé, São Paulo/SP, CEP 03090-020';
+        for (const field of CONTRACTOR_FIELDS) {
+          if (typeof raw[field.key] === 'string') {
+            const isOldPlaceholder = raw[field.key].trim().toUpperCase() === '[PREENCHER]';
+            const hasNewDefault = DEFAULT_CONTRACTOR[field.key].toUpperCase() !== '[PREENCHER]';
+            if (isOldPlaceholder && hasNewDefault) continue;
+            if (field.key === 'endereco' && raw[field.key].trim() === oldWrongAddress) continue;
+            merged[field.key] = raw[field.key];
+          }
+        }
+        return merged;
+      }
+
+      function sanitizeFidelity(raw) {
+        const merged = { ...DEFAULT_FIDELITY };
+        if (!raw || typeof raw !== 'object') return merged;
+        for (const field of FIDELITY_FIELDS) {
+          const val = Number(raw[field.key]);
+          if (Number.isFinite(val) && val >= field.min) {
+            const clamped = field.max !== undefined ? Math.min(field.max, val) : val;
+            merged[field.key] = Math.round(clamped);
+          }
+        }
+        return merged;
+      }
+
+      function safeLoad(key, fallbackFactory, sanitizer) {
+        try {
+          const raw = window.localStorage.getItem(key);
+          if (!raw) return fallbackFactory();
+          return sanitizer(JSON.parse(raw));
+        } catch (err) {
+          return fallbackFactory();
+        }
+      }
+
+      function safeSave(key, data) {
+        try {
+          window.localStorage.setItem(key, JSON.stringify(data));
+          return true;
+        } catch (err) {
+          return false;
+        }
+      }
+
+      let prices = safeLoad(STORAGE_KEYS.prices, createDefaultPriceState, sanitizePrices);
+      let fidelity = safeLoad(STORAGE_KEYS.fidelity, () => ({ ...DEFAULT_FIDELITY }), sanitizeFidelity);
+      let contractor = safeLoad(STORAGE_KEYS.contractor, () => ({ ...DEFAULT_CONTRACTOR }), sanitizeContractor);
+      let selectedPackageId = 'landing';
+      let jsPdfLoadFailed = false;
+
+      const userExtras = {};
+      for (const def of EXTRA_DEFS) {
+        userExtras[def.key] = false;
+      }
+
+      const jspdfScript = document.getElementById('jspdf-script');
+      if (jspdfScript) {
+        jspdfScript.addEventListener('error', () => {
+          jsPdfLoadFailed = true;
+        });
+      }
+
+      const el = {
+        brandName: document.getElementById('brand-name'),
+        brandCnpj: document.getElementById('brand-cnpj'),
+        footerBrand: document.getElementById('footer-brand'),
+        packagesContainer: document.getElementById('packages-container'),
+        extraPagesHint: document.getElementById('extra-pages-hint'),
+        form: document.getElementById('contract-form'),
+        extraPages: document.getElementById('extra-pages'),
+        pagesDec: document.getElementById('pages-dec'),
+        pagesInc: document.getElementById('pages-inc'),
+        urgencia: document.getElementById('opt-urgencia'),
+        labelUrgenciaText: document.getElementById('label-urgencia-text'),
+        badgeUrgencia: document.getElementById('badge-urgencia'),
+        manutencao: document.getElementById('opt-manutencao'),
+        clientName: document.getElementById('client-name'),
+        clientDoc: document.getElementById('client-doc'),
+        clientSegment: document.getElementById('client-segment'),
+        clientAddress: document.getElementById('client-address'),
+        clientEmail: document.getElementById('client-email'),
+        clientPhone: document.getElementById('client-phone'),
+        clearClientBtn: document.getElementById('clear-client-btn'),
+        copyProposalBtn: document.getElementById('copy-proposal-btn'),
+        detailsPrecos: document.getElementById('details-precos'),
+        resetPricesBtn: document.getElementById('reset-prices-btn'),
+        resetFidelityBtn: document.getElementById('reset-fidelity-btn'),
+        resetContractorBtn: document.getElementById('reset-contractor-btn'),
+        pendingBadge: document.getElementById('pending-contractor-badge'),
+        configWarning: document.getElementById('config-warning'),
+        sumPkgName: document.getElementById('sum-pkg-name'),
+        sumPkgPrice: document.getElementById('sum-pkg-price'),
+        sumPkgMeta: document.getElementById('sum-pkg-meta'),
+        sumPkgList: document.getElementById('sum-pkg-list'),
+        statusMsg: document.getElementById('status-msg'),
+        alertMsg: document.getElementById('alert-msg'),
+        resultTotal: document.getElementById('result-total'),
+        resultDeadline: document.getElementById('result-deadline'),
+        resultDeadlineNote: document.getElementById('result-deadline-note'),
+        resultEntrada: document.getElementById('result-entrada'),
+        resultEntrega: document.getElementById('result-entrega'),
+        resultManutencaoBox: document.getElementById('result-manutencao-box'),
+        resultManutencao: document.getElementById('result-manutencao'),
+        barTotal: document.getElementById('bar-total'),
+        barSub: document.getElementById('bar-sub'),
+        rowPaginas: document.getElementById('row-paginas'),
+        rowExtras: document.getElementById('row-extras'),
+        rowPorte: document.getElementById('row-porte'),
+        rowUrgencia: document.getElementById('row-urgencia'),
+        rowPiso: document.getElementById('row-piso'),
+        detBase: document.getElementById('det-base'),
+        valBase: document.getElementById('val-base'),
+        detPaginas: document.getElementById('det-paginas'),
+        valPaginas: document.getElementById('val-paginas'),
+        detExtras: document.getElementById('det-extras'),
+        valExtras: document.getElementById('val-extras'),
+        detPorte: document.getElementById('det-porte'),
+        valPorte: document.getElementById('val-porte'),
+        detUrgencia: document.getElementById('det-urgencia'),
+        valUrgencia: document.getElementById('val-urgencia'),
+        detPiso: document.getElementById('det-piso'),
+        valPiso: document.getElementById('val-piso'),
+        valTotalTabela: document.getElementById('val-total-tabela')
+      };
+
+      let feedbackTimer;
+      function showFeedback(type, message) {
+        clearTimeout(feedbackTimer);
+        if (type === 'error') {
+          el.statusMsg.hidden = true;
+          el.statusMsg.textContent = '';
+          el.alertMsg.textContent = message;
+          el.alertMsg.hidden = false;
+        } else {
+          el.alertMsg.hidden = true;
+          el.alertMsg.textContent = '';
+          el.statusMsg.textContent = message;
+          el.statusMsg.hidden = false;
+          feedbackTimer = setTimeout(() => {
+            el.statusMsg.hidden = true;
+          }, 7000);
+        }
+      }
+
+      function clearFeedback() {
+        clearTimeout(feedbackTimer);
+        el.statusMsg.hidden = true;
+        el.statusMsg.textContent = '';
+        el.alertMsg.hidden = true;
+        el.alertMsg.textContent = '';
+      }
+
+      function createCheckSvg() {
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttribute('viewBox', '0 0 20 20');
+        svg.setAttribute('fill', 'currentColor');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.classList.add('check-icon');
+        const path = document.createElementNS(svgNS, 'path');
+        path.setAttribute('fill-rule', 'evenodd');
+        path.setAttribute('clip-rule', 'evenodd');
+        path.setAttribute('d', 'M16.704 5.29a1 1 0 0 1 .006 1.414l-7.25 7.3a1 1 0 0 1-1.42 0l-3.75-3.75a1 1 0 1 1 1.414-1.414l3.043 3.043 6.543-6.587a1 1 0 0 1 1.414-.006Z');
+        svg.append(path);
+        return svg;
+      }
+
+      function renderCheckList(ulEl, items) {
+        ulEl.textContent = '';
+        const list = items && items.length > 0 ? items : ['Nenhum item listado nas configurações deste pacote.'];
+        for (const text of list) {
+          const li = document.createElement('li');
+          li.append(createCheckSvg());
+          const span = document.createElement('span');
+          span.textContent = text;
+          li.append(span);
+          ulEl.append(li);
+        }
+      }
+
+      function formatPkgRange(pkg) {
+        if (typeof pkg.prazoMin === 'number' && typeof pkg.prazoMax === 'number' && pkg.prazoMin >= 1 && pkg.prazoMax >= pkg.prazoMin) {
+          return pkg.prazoMin === pkg.prazoMax
+            ? `${pkg.prazoMin} ${pkg.prazoMin === 1 ? 'dia corrido' : 'dias corridos'}`
+            : `${pkg.prazoMin} a ${pkg.prazoMax} dias corridos`;
+        }
+        return 'Prazo não definido';
+      }
+
+      const pkgCardEls = {};
+
+      function buildPackageCards() {
+        el.packagesContainer.textContent = '';
+        for (const id of PACKAGE_IDS) {
+          const card = document.createElement('div');
+          card.className = 'package-card';
+          card.id = `pkg-card-${id}`;
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = 'pacote';
+          radio.value = id;
+          radio.id = `pacote-${id}`;
+          radio.className = 'choice-input package-radio';
+          radio.checked = id === selectedPackageId;
+
+          const label = document.createElement('label');
+          label.htmlFor = radio.id;
+          label.className = 'package-label';
+
+          const header = document.createElement('span');
+          header.className = 'package-header';
+          const title = document.createElement('span');
+          title.className = 'package-title';
+          const price = document.createElement('span');
+          price.className = 'package-price mono';
+          header.append(title, price);
+
+          const metaRow = document.createElement('span');
+          metaRow.className = 'package-meta-row';
+          const prazoPill = document.createElement('span');
+          prazoPill.className = 'package-pill';
+          const pagesPill = document.createElement('span');
+          pagesPill.className = 'package-pill';
+          metaRow.append(prazoPill, pagesPill);
+
+          const cue = document.createElement('span');
+          cue.className = 'package-cue';
+          cue.textContent = 'Selecione para ver todos os itens inclusos';
+
+          const includes = document.createElement('div');
+          includes.className = 'package-includes';
+          const incHeading = document.createElement('span');
+          incHeading.className = 'includes-heading';
+          incHeading.textContent = 'O que está incluso';
+          const ul = document.createElement('ul');
+          ul.className = 'check-list';
+          ul.setAttribute('role', 'list');
+          includes.append(incHeading, ul);
+
+          label.append(header, metaRow, cue, includes);
+          card.append(radio, label);
+          el.packagesContainer.append(card);
+
+          pkgCardEls[id] = { card, radio, title, price, prazoPill, pagesPill, cue, includes, ul };
+        }
+      }
+
+      function updatePackageCardsUI() {
+        for (const id of PACKAGE_IDS) {
+          const pkg = prices.packages[id];
+          const refs = pkgCardEls[id];
+          if (!pkg || !refs) continue;
+          const isSelected = id === selectedPackageId;
+          refs.radio.checked = isSelected;
+          refs.card.classList.toggle('is-selected', isSelected);
+          refs.title.textContent = (pkg.nome || '').trim() || DEFAULT_PACKAGES[id].nome;
+          refs.price.textContent = typeof pkg.preco === 'number' && Number.isFinite(pkg.preco)
+            ? formatBRL(pkg.preco)
+            : 'Sem preço';
+          refs.prazoPill.textContent = `Prazo: ${formatPkgRange(pkg)}`;
+          refs.pagesPill.textContent = (pkg.paginasIncluidas || '').trim() || DEFAULT_PACKAGES[id].paginasIncluidas;
+          refs.cue.hidden = isSelected;
+          refs.includes.hidden = !isSelected;
+          renderCheckList(refs.ul, pkg.itens);
+        }
+      }
+
+      function validatePackageRules(pkg) {
+        const issues = [];
+        let firstInvalidId = null;
+
+        if (!pkg) {
+          return { issues: ['Nenhum pacote selecionado.'], firstInvalidId: 'pkg-landing-preco' };
+        }
+        if (typeof pkg.preco !== 'number' || !Number.isFinite(pkg.preco) || pkg.preco < 0) {
+          issues.push(`Preço base do pacote "${pkg.nome || pkg.id}" não está preenchido.`);
+          firstInvalidId = firstInvalidId || `pkg-${pkg.id}-preco`;
+        }
+        if (typeof pkg.prazoMin !== 'number' || !Number.isFinite(pkg.prazoMin) || pkg.prazoMin < 1) {
+          issues.push(`Prazo mínimo do pacote "${pkg.nome || pkg.id}" precisa ser de pelo menos 1 dia.`);
+          firstInvalidId = firstInvalidId || `pkg-${pkg.id}-min`;
+        }
+        if (typeof pkg.prazoMax !== 'number' || !Number.isFinite(pkg.prazoMax) || pkg.prazoMax < 1) {
+          issues.push(`Prazo máximo do pacote "${pkg.nome || pkg.id}" precisa ser de pelo menos 1 dia.`);
+          firstInvalidId = firstInvalidId || `pkg-${pkg.id}-max`;
+        } else if (typeof pkg.prazoMin === 'number' && pkg.prazoMax < pkg.prazoMin) {
+          issues.push(`Prazo máximo (${pkg.prazoMax}d) do pacote "${pkg.nome || pkg.id}" está menor que o prazo mínimo (${pkg.prazoMin}d).`);
+          firstInvalidId = firstInvalidId || `pkg-${pkg.id}-max`;
+        }
+        return { issues, firstInvalidId };
+      }
+
+      // Acessibilidade: sincroniza aria-invalid e aria-describedby apenas após interação
+      const linkError = (input, shown) => {
+        const errorId = input.dataset.error;
+        if (!errorId) return;
+        const ids = (input.getAttribute('aria-describedby') || '').split(/\s+/).filter((id) => id && id !== errorId);
+        if (shown) ids.push(errorId);
+        if (ids.length) input.setAttribute('aria-describedby', ids.join(' '));
+        else input.removeAttribute('aria-describedby');
+      };
+
+      const announcer = document.createElement('div');
+      announcer.setAttribute('aria-live', 'polite');
+      announcer.classList.add('visually-hidden');
+      document.body.append(announcer);
+      let announceTimer;
+      let announcedField;
+
+      const spokenText = (node) => {
+        const copy = node.cloneNode(true);
+        copy.querySelectorAll('[aria-hidden="true"]').forEach((n) => n.remove());
+        return copy.textContent.replace(/\s+/g, ' ').trim();
+      };
+
+      const announceError = (input) => {
+        const error = document.getElementById(input.dataset.error);
+        if (!error) return;
+        const label = input.labels?.[0] ? `${spokenText(input.labels[0])}: ` : '';
+        clearTimeout(announceTimer);
+        announcer.textContent = '';
+        announcedField = input;
+        announceTimer = setTimeout(() => {
+          announcer.textContent = label + spokenText(error);
+        }, 500);
+      };
+
+      const supportsUserInvalid = typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && CSS.supports('selector(:user-invalid)');
+      const dirtyState = new WeakMap();
+      const flagged = new WeakSet();
+      const announced = new WeakSet();
+
+      function applyRequiredTrimValidity(input) {
+        if (input === el.clientName || input === el.clientDoc) {
+          if (!input.value.trim()) {
+            input.setCustomValidity('Campo obrigatório.');
+          } else {
+            input.setCustomValidity('');
+          }
+        }
+      }
+
+      const syncAria = (input, announce = false, forceShow = false) => {
+        if (!input?.matches?.('input, select, textarea')) return;
+        applyRequiredTrimValidity(input);
+
+        const invalid = forceShow
+          ? !input.validity.valid
+          : supportsUserInvalid
+            ? input.matches(':user-invalid')
+            : (dirtyState.get(input)?.hasBlurred && !input.validity.valid);
+
+        if (invalid) {
+          if (forceShow || !supportsUserInvalid) {
+            input.classList.add('user-invalid-fallback');
+          }
+          if (announce && !announced.has(input)) {
+            announceError(input);
+            announced.add(input);
+          }
+          input.setAttribute('aria-invalid', 'true');
+          linkError(input, true);
+          flagged.add(input);
+        } else {
+          input.classList.remove('user-invalid-fallback');
+          if (flagged.has(input) || input.getAttribute('aria-invalid') !== 'true') {
+            input.setAttribute('aria-invalid', 'false');
+            linkError(input, false);
+            flagged.delete(input);
+            announced.delete(input);
+            if (announcedField === input) {
+              clearTimeout(announceTimer);
+              announcer.textContent = '';
+            }
+          }
+        }
+      };
+
+      el.form.querySelectorAll('input, select, textarea').forEach((input) => {
+        input.setAttribute('aria-invalid', 'false');
+      });
+
+      el.form.addEventListener('blur', (e) => {
+        const input = e.target;
+        if (!input.matches?.('input')) return;
+        if (input === el.clientDoc) {
+          const digits = input.value.replace(/\D/g, '');
+          if (/^\d{11}$/.test(input.value.trim())) {
+            input.value = digits.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+          } else if (/^\d{14}$/.test(input.value.trim())) {
+            input.value = digits.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+          }
+        }
+        const st = dirtyState.get(input) || { hasInteracted: false, hasBlurred: false };
+        st.hasBlurred = true;
+        dirtyState.set(input, st);
+        syncAria(input, true);
+      }, true);
+
+      el.form.addEventListener('input', (e) => {
+        const input = e.target;
+        if (!input.matches?.('input')) return;
+        const st = dirtyState.get(input) || { hasInteracted: false, hasBlurred: false };
+        st.hasInteracted = true;
+        dirtyState.set(input, st);
+        input.setCustomValidity('');
+        if (input.getAttribute('aria-invalid') === 'true' || !supportsUserInvalid) {
+          syncAria(input, false);
+        }
+      });
+
+      el.form.addEventListener('invalid', (e) => {
+        announced.add(e.target);
+        syncAria(e.target, false, true);
+      }, true);
+
+      function getSelectedRadio(name) {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : null;
+      }
+
+      function syncExtrasForPackage(pkg) {
+        const includedSet = new Set(pkg.includedExtras || []);
+        for (const def of EXTRA_DEFS) {
+          const cb = document.getElementById(def.inputId);
+          const item = document.getElementById(def.itemId);
+          const badge = document.getElementById(def.badgeId);
+          if (!cb || !item || !badge) continue;
+
+          if (includedSet.has(def.key)) {
+            cb.checked = true;
+            cb.disabled = true;
+            item.classList.add('is-included');
+            badge.className = 'badge-included';
+            badge.textContent = 'incluso';
+          } else {
+            cb.disabled = false;
+            cb.checked = Boolean(userExtras[def.key]);
+            item.classList.remove('is-included');
+            badge.className = 'choice-meta mono';
+            badge.textContent = `+ ${formatBRL(prices[def.key])} • +${formatDiasLabel(prices[def.diasKey])}`;
+          }
+        }
+      }
+
+      function calculateQuote() {
+        const pkg = prices.packages[selectedPackageId] || prices.packages.landing;
+        const validation = validatePackageRules(pkg);
+        const porte = getSelectedRadio('porte') || 'micro';
+        const paginasExtras = Math.max(0, Math.min(99, Math.floor(Number(el.extraPages.value) || 0)));
+        const urgencia = Boolean(el.urgencia.checked);
+        const manutencao = Boolean(el.manutencao.checked);
+
+        const hasValidPrice = typeof pkg.preco === 'number' && Number.isFinite(pkg.preco) && pkg.preco >= 0;
+        const hasValidPrazo = typeof pkg.prazoMin === 'number' && typeof pkg.prazoMax === 'number' && pkg.prazoMin >= 1 && pkg.prazoMax >= pkg.prazoMin;
+
+        const base = hasValidPrice ? round2(pkg.preco) : 0;
+        const pkgNome = (pkg.nome || '').trim() || DEFAULT_PACKAGES[pkg.id].nome;
+        const pkgPaginas = (pkg.paginasIncluidas || '').trim() || DEFAULT_PACKAGES[pkg.id].paginasIncluidas;
+
+        const paginasValor = round2(paginasExtras * prices.paginaExtra);
+        const paginasDias = paginasExtras * prices.paginaExtraDias;
+
+        const includedSet = new Set(pkg.includedExtras || []);
+        const extrasSelecionados = [];
+        for (const def of EXTRA_DEFS) {
+          const cb = document.getElementById(def.inputId);
+          if (!includedSet.has(def.key) && cb && cb.checked) {
+            extrasSelecionados.push({
+              key: def.key,
+              label: def.label,
+              contractDesc: def.contractDesc,
+              valor: round2(prices[def.key]),
+              dias: Math.max(0, Math.round(prices[def.diasKey] || 0))
+            });
+          }
+        }
+        const extrasValor = round2(extrasSelecionados.reduce((acc, item) => acc + item.valor, 0));
+        const extrasDias = extrasSelecionados.reduce((acc, item) => acc + item.dias, 0);
+        const subtotal = round2(base + paginasValor + extrasValor);
+
+        const porteMap = {
+          micro: { label: 'Micro', mult: prices.multMicro },
+          medio: { label: 'Médio', mult: prices.multMedio },
+          maior: { label: 'Maior', mult: prices.multMaior }
+        };
+        const porteInfo = porteMap[porte] || porteMap.micro;
+        const valorComPorte = round2(subtotal * porteInfo.mult);
+        const porteAjuste = round2(valorComPorte - subtotal);
+
+        const urgenciaValor = urgencia ? round2(valorComPorte * (prices.urgenciaPct / 100)) : 0;
+        const totalAntesPiso = round2(valorComPorte + urgenciaValor);
+        const ajustePiso = hasValidPrice && totalAntesPiso < prices.pisoMinimo ? round2(prices.pisoMinimo - totalAntesPiso) : 0;
+        const total = round2(totalAntesPiso + ajustePiso);
+
+        const entrada = round2(total / 2);
+        const entrega = round2(total - entrada);
+        const manutencaoMensal = manutencao ? round2(prices.manutencao) : 0;
+
+        let prazoMin = null;
+        let prazoMax = null;
+        let prazoTexto = 'A definir (corrija o prazo do pacote)';
+        if (hasValidPrazo) {
+          const totalExtraDays = paginasDias + extrasDias;
+          const rawMin = pkg.prazoMin + totalExtraDays;
+          const rawMax = pkg.prazoMax + totalExtraDays;
+          if (urgencia) {
+            const reducao = Math.min(90, Math.max(0, prices.urgenciaReducaoPrazoPct));
+            const factor = 1 - (reducao / 100);
+            prazoMin = Math.max(1, Math.round(rawMin * factor));
+            prazoMax = Math.max(prazoMin, Math.round(rawMax * factor));
+          } else {
+            prazoMin = rawMin;
+            prazoMax = rawMax;
+          }
+          prazoTexto = prazoMin === prazoMax
+            ? `${prazoMin} ${prazoMin === 1 ? 'dia corrido' : 'dias corridos'}`
+            : `${prazoMin} a ${prazoMax} dias corridos`;
+        }
+
+        return {
+          pkg: {
+            ...pkg,
+            nome: pkgNome,
+            paginasIncluidas: pkgPaginas
+          },
+          validation,
+          hasValidPrice,
+          hasValidPrazo,
+          base,
+          paginasExtras,
+          paginasValor,
+          paginasDias,
+          extrasSelecionados,
+          extrasValor,
+          extrasDias,
+          subtotal,
+          porte,
+          porteLabel: porteInfo.label,
+          mult: porteInfo.mult,
+          porteAjuste,
+          urgencia,
+          urgenciaPct: prices.urgenciaPct,
+          urgenciaReducaoPrazoPct: prices.urgenciaReducaoPrazoPct,
+          urgenciaValor,
+          pisoMinimo: prices.pisoMinimo,
+          ajustePiso,
+          total,
+          entrada,
+          entrega,
+          manutencao,
+          manutencaoMensal,
+          prazoMin,
+          prazoMax,
+          prazoTexto
+        };
+      }
+
+      function populateConfigInputs() {
+        for (const id of PACKAGE_IDS) {
+          const pkg = prices.packages[id];
+          if (!pkg) continue;
+          document.getElementById(`pkg-${id}-nome`).value = pkg.nome ?? '';
+          document.getElementById(`pkg-${id}-preco`).value = pkg.preco === null ? '' : String(pkg.preco);
+          document.getElementById(`pkg-${id}-min`).value = pkg.prazoMin === null ? '' : String(pkg.prazoMin);
+          document.getElementById(`pkg-${id}-max`).value = pkg.prazoMax === null ? '' : String(pkg.prazoMax);
+          document.getElementById(`pkg-${id}-paginas`).value = pkg.paginasIncluidas ?? '';
+          document.getElementById(`pkg-${id}-itens`).value = (pkg.itens || []).join('\n');
+        }
+        for (const field of PRICE_FIELDS) {
+          const input = document.getElementById(field.id);
+          if (input) input.value = String(prices[field.key]);
+        }
+        for (const field of FIDELITY_FIELDS) {
+          const input = document.getElementById(field.id);
+          if (input) input.value = String(fidelity[field.key]);
+        }
+        for (const field of CONTRACTOR_FIELDS) {
+          const input = document.getElementById(field.id);
+          if (input) input.value = contractor[field.key] ?? '';
+        }
+        updatePendingContractorBadge();
+        updateBrandHeader();
+      }
+
+      function updatePendingContractorBadge() {
+        const pendingCount = CONTRACTOR_FIELDS.filter((f) => {
+          const val = String(contractor[f.key] || '').trim().toUpperCase();
+          return val === '[PREENCHER]';
+        }).length;
+        if (pendingCount > 0) {
+          el.pendingBadge.textContent = `${pendingCount} ${pendingCount === 1 ? 'campo pendente' : 'campos pendentes'}`;
+          el.pendingBadge.hidden = false;
+        } else {
+          el.pendingBadge.hidden = true;
+          el.pendingBadge.textContent = '';
+        }
+      }
+
+      function updateBrandHeader() {
+        const name = cleanOptional(contractor.nomeFantasia) || DEFAULT_CONTRACTOR.nomeFantasia;
+        const cnpj = cleanOptional(contractor.cnpj) || DEFAULT_CONTRACTOR.cnpj;
+
+        if (el.brandName) {
+          el.brandName.textContent = '';
+          const parts = name.trim().split(/\s+/).filter(Boolean);
+          if (parts.length > 1) {
+            el.brandName.appendChild(document.createTextNode(`${parts[0]} `));
+            const accentSpan = document.createElement('span');
+            accentSpan.className = 'brand-name-accent';
+            accentSpan.textContent = parts.slice(1).join(' ');
+            el.brandName.appendChild(accentSpan);
+          } else {
+            el.brandName.textContent = name;
+          }
+        }
+
+        if (el.brandCnpj) {
+          el.brandCnpj.textContent = `CNPJ ${cnpj}`;
+        }
+
+        if (el.footerBrand) {
+          el.footerBrand.textContent = `${name} — CNPJ ${cnpj}`;
+        }
+      }
+
+      function updateOptionBadges(pkg) {
+        el.extraPagesHint.textContent = `Além das páginas incluídas (${pkg.paginasIncluidas}). +${formatBRL(prices.paginaExtra)} e +${formatDiasLabel(prices.paginaExtraDias)} por página extra.`;
+        document.getElementById('badge-mult-micro').textContent = formatMult(prices.multMicro);
+        document.getElementById('badge-mult-medio').textContent = formatMult(prices.multMedio);
+        document.getElementById('badge-mult-maior').textContent = formatMult(prices.multMaior);
+        el.labelUrgenciaText.textContent = `Urgência (reduz prazo em -${prices.urgenciaReducaoPrazoPct}%)`;
+        el.badgeUrgencia.textContent = `+${prices.urgenciaPct}% no preço`;
+        document.getElementById('badge-manutencao').textContent = `${formatBRL(prices.manutencao)}/mês`;
+      }
+
+      function renderQuote() {
+        const activePkg = prices.packages[selectedPackageId] || prices.packages.landing;
+        updatePackageCardsUI();
+        syncExtrasForPackage(activePkg);
+
+        const q = calculateQuote();
+        updateOptionBadges(q.pkg);
+
+        if (q.validation.issues.length > 0) {
+          el.configWarning.textContent = `Atenção nas configurações do pacote: ${q.validation.issues.join(' ')}`;
+          el.configWarning.hidden = false;
+        } else {
+          el.configWarning.hidden = true;
+          el.configWarning.textContent = '';
+        }
+
+        el.sumPkgName.textContent = q.pkg.nome;
+        el.sumPkgPrice.textContent = q.hasValidPrice ? formatBRL(q.base) : 'Sem preço';
+        el.sumPkgMeta.textContent = `${q.pkg.paginasIncluidas} • Prazo do pacote: ${formatPkgRange(q.pkg)}`;
+        renderCheckList(el.sumPkgList, q.pkg.itens);
+
+        el.resultTotal.textContent = formatBRL(q.total);
+        el.barTotal.textContent = formatBRL(q.total);
+        el.resultEntrada.textContent = formatBRL(q.entrada);
+        el.resultEntrega.textContent = formatBRL(q.entrega);
+
+        if (q.hasValidPrazo) {
+          el.resultDeadline.textContent = q.urgencia
+            ? `Prazo estimado (urgente -${q.urgenciaReducaoPrazoPct}%): ${q.prazoTexto}`
+            : `Prazo estimado: ${q.prazoTexto}`;
+          el.resultDeadlineNote.hidden = false;
+        } else {
+          el.resultDeadline.textContent = 'Prazo estimado: a definir (preencha o prazo do pacote)';
+          el.resultDeadlineNote.hidden = true;
+        }
+
+        if (q.manutencao) {
+          el.resultManutencaoBox.hidden = false;
+          el.resultManutencao.textContent = `${formatBRL(q.manutencaoMensal)}/mês`;
+          el.barSub.textContent = `${q.prazoTexto} • + ${formatBRL(q.manutencaoMensal)}/mês`;
+        } else {
+          el.resultManutencaoBox.hidden = true;
+          el.barSub.textContent = `${q.prazoTexto} • Entrada 50%: ${formatBRL(q.entrada)}`;
+        }
+
+        el.detBase.textContent = `${q.pkg.nome} (${q.pkg.paginasIncluidas})`;
+        el.valBase.textContent = q.hasValidPrice ? formatBRL(q.base) : 'Sem preço';
+
+        el.detPaginas.textContent = q.paginasExtras === 0
+          ? 'Nenhuma página extra'
+          : `${q.paginasExtras} ${q.paginasExtras === 1 ? 'página' : 'páginas'} × ${formatBRL(prices.paginaExtra)} (+${formatDiasLabel(q.paginasDias)})`;
+        el.valPaginas.textContent = formatBRL(q.paginasValor);
+        el.rowPaginas.classList.toggle('row-muted', q.paginasValor === 0);
+
+        el.detExtras.textContent = q.extrasSelecionados.length === 0
+          ? 'Nenhum extra cobrado'
+          : q.extrasSelecionados.map((item) => `${item.label} (+${formatDiasLabel(item.dias)})`).join(', ');
+        el.valExtras.textContent = formatBRL(q.extrasValor);
+        el.rowExtras.classList.toggle('row-muted', q.extrasValor === 0);
+
+        el.detPorte.textContent = `${q.porteLabel} (${formatMult(q.mult)} sobre ${formatBRL(q.subtotal)})`;
+        el.valPorte.textContent = `${q.porteAjuste >= 0 ? '+' : ''}${formatBRL(q.porteAjuste)}`;
+        el.rowPorte.classList.toggle('row-muted', q.porteAjuste === 0);
+
+        el.detUrgencia.textContent = q.urgencia
+          ? `+${q.urgenciaPct}% no preço / -${q.urgenciaReducaoPrazoPct}% no prazo`
+          : 'Não aplicada';
+        el.valUrgencia.textContent = q.urgencia ? `+${formatBRL(q.urgenciaValor)}` : formatBRL(0);
+        el.rowUrgencia.classList.toggle('row-muted', !q.urgencia);
+
+        el.detPiso.textContent = !q.hasValidPrice
+          ? 'Preencha o preço base do pacote'
+          : q.ajustePiso > 0
+            ? `Aplicado piso mínimo de ${formatBRL(q.pisoMinimo)}`
+            : `Piso ${formatBRL(q.pisoMinimo)} atendido`;
+        el.valPiso.textContent = q.ajustePiso > 0 ? `+${formatBRL(q.ajustePiso)}` : formatBRL(0);
+        el.rowPiso.classList.toggle('row-muted', q.ajustePiso === 0);
+
+        el.valTotalTabela.textContent = formatBRL(q.total);
+      }
+
+      function buildWhatsAppProposal() {
+        const q = calculateQuote();
+        const clientName = el.clientName.value.trim();
+        const greeting = clientName ? `Olá, ${clientName}!` : 'Olá!';
+        const packageItems = (q.pkg.itens && q.pkg.itens.length > 0)
+          ? q.pkg.itens.map((item) => `- ${item}`)
+          : [`- Estrutura ${q.pkg.nome}`];
+
+        const extrasLines = [];
+        if (q.paginasExtras > 0) {
+          extrasLines.push(`- ${q.paginasExtras} ${q.paginasExtras === 1 ? 'página extra' : 'páginas extras'} além do pacote`);
+        }
+        for (const extra of q.extrasSelecionados) {
+          extrasLines.push(`- ${extra.label}`);
+        }
+
+        const pixKey = cleanOptional(contractor.chavePix);
+        const lines = [
+          greeting,
+          'Segue a proposta para o desenvolvimento do seu site:',
+          '',
+          `*Pacote escolhido:* ${q.pkg.nome} (${q.pkg.paginasIncluidas})`,
+          '*O que está incluso no pacote:*',
+          ...packageItems
+        ];
+
+        if (extrasLines.length > 0) {
+          lines.push('', '*Extras adicionados:*', ...extrasLines);
+        }
+
+        lines.push(
+          '',
+          `*Investimento:* ${formatBRL(q.total)}`,
+          `*Pagamento:* 50% de entrada na aprovação (${formatBRL(q.entrada)}) + 50% na entrega (${formatBRL(q.entrega)})${pixKey ? ` via Pix (chave: ${pixKey})` : ' via Pix'}.`
+        );
+
+        if (q.manutencao) {
+          lines.push(`*Manutenção e hospedagem mensal (opcional):* ${formatBRL(q.manutencaoMensal)}/mês.`);
+        }
+
+        const prazoObs = q.urgencia ? ` (prazo urgente reduzido em ${q.urgenciaReducaoPrazoPct}%)` : '';
+        lines.push(`*Prazo estimado:* ${q.prazoTexto}${prazoObs}, contados após receber todo o material e a entrada.`);
+        lines.push('', 'Se estiver de acordo, já preparo o contrato para assinatura.');
+
+        const c = getContractorResolved();
+        const autoria = c.displayHeaderName;
+        lines.push('', `Este material é de autoria de ${autoria} e confidencial. Não pode ser reproduzido nem repassado a terceiros sem autorização.`);
+
+        return lines.join('\n');
+      }
+
+      async function copyProposalToClipboard() {
+        const q = calculateQuote();
+        if (q.validation.issues.length > 0) {
+          showFeedback('error', `Corrija antes de copiar a proposta: ${q.validation.issues.join(' ')}`);
+          return;
+        }
+        const text = buildWhatsAppProposal();
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            throw new Error('Clipboard API indisponível');
+          }
+          showFeedback('success', 'Proposta copiada para a área de transferência! Cole no WhatsApp.');
+        } catch (err) {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.append(ta);
+            ta.select();
+            const ok = document.execCommand('copy');
+            ta.remove();
+            if (!ok) throw new Error('Falha no fallback de cópia');
+            showFeedback('success', 'Proposta copiada para a área de transferência! Cole no WhatsApp.');
+          } catch (fallbackErr) {
+            showFeedback('error', 'Não foi possível copiar automaticamente. Permita acesso à área de transferência no navegador.');
+          }
+        }
+      }
+
+      function getContractorResolved() {
+        const fantasia = cleanOptional(contractor.nomeFantasia) || DEFAULT_CONTRACTOR.nomeFantasia;
+        const cnpj = cleanOptional(contractor.cnpj) || DEFAULT_CONTRACTOR.cnpj;
+        const endereco = cleanOptional(contractor.endereco) || DEFAULT_CONTRACTOR.endereco;
+        const email = cleanOptional(contractor.email);
+        const telefone = cleanOptional(contractor.telefone);
+        const chavePix = cleanOptional(contractor.chavePix);
+        const foro = cleanOptional(contractor.foro) || DEFAULT_CONTRACTOR.foro;
+
+        const identificacaoLegal = `${fantasia}, inscrito no CNPJ sob o nº ${cnpj}`;
+
+        return {
+          fantasia,
+          displayHeaderName: fantasia,
+          cnpj,
+          endereco,
+          email,
+          telefone,
+          chavePix,
+          foro,
+          identificacaoLegal
+        };
+      }
+
+      function pdfSafe(str) {
+        return String(str || '')
+          .normalize('NFC')
+          .replace(/[\u00A0\u202F\u2007]/g, ' ')
+          .replace(/[\u2013\u2014]/g, '-')
+          .replace(/[\u2018\u2019]/g, "'")
+          .replace(/[\u201C\u201D]/g, '"')
+          .replace(/\u2022/g, '-')
+          .replace(/\u2026/g, '...')
+          .replace(/[^\x0A\x20-\xFF]/g, '');
+      }
+
+      function formatFullDatePtBr(date) {
+        const months = [
+          'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+          'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+        ];
+        return `${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`;
+      }
+
+      function sanitizeFileName(name) {
+        return String(name || 'Cliente')
+          .replace(/[\\/:*?"<>|\x00-\x1F]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .slice(0, 90) || 'Cliente';
+      }
+
+      function generateContractPDF() {
+        const q = calculateQuote();
+        if (q.validation.issues.length > 0) {
+          showFeedback('error', `Não foi possível gerar o contrato: ${q.validation.issues.join(' ')}`);
+          if (el.detailsPrecos) el.detailsPrecos.open = true;
+          const missingInput = q.validation.firstInvalidId ? document.getElementById(q.validation.firstInvalidId) : null;
+          if (missingInput) {
+            missingInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            missingInput.focus({ preventScroll: true });
+          }
+          return;
+        }
+
+        if (jsPdfLoadFailed || !window.jspdf || typeof window.jspdf.jsPDF !== 'function') {
+          showFeedback('error', 'A biblioteca de PDF (jsPDF) não carregou. Verifique sua conexão com a internet e recarregue a página.');
+          return;
+        }
+
+        try {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+          });
+
+          const c = getContractorResolved();
+          const client = {
+            name: el.clientName.value.trim(),
+            doc: el.clientDoc.value.trim(),
+            segment: el.clientSegment.value.trim(),
+            address: el.clientAddress.value.trim(),
+            email: el.clientEmail.value.trim(),
+            phone: el.clientPhone.value.trim()
+          };
+
+          const marginX = 20;
+          const pageWidth = 210;
+          const contentWidth = pageWidth - marginX * 2;
+          const maxY = 272;
+          let y = 20;
+
+          const ensureSpace = (neededMm) => {
+            if (y + neededMm > maxY) {
+              doc.addPage();
+              y = 20;
+            }
+          };
+
+          const addWrappedText = (text, opts = {}) => {
+            const fontSize = opts.fontSize || 10;
+            const fontStyle = opts.fontStyle || 'normal';
+            const lineHeight = opts.lineHeight || 4.8;
+            const indent = opts.indent || 0;
+            const afterGap = opts.afterGap !== undefined ? opts.afterGap : 2.5;
+            const align = opts.align || 'left';
+
+            doc.setFont('helvetica', fontStyle);
+            doc.setFontSize(fontSize);
+
+            const lines = doc.splitTextToSize(pdfSafe(text), contentWidth - indent);
+            for (let i = 0; i < lines.length; i += 1) {
+              ensureSpace(lineHeight + 1);
+              const xPos = align === 'center' ? pageWidth / 2 : marginX + indent;
+              doc.text(lines[i], xPos, y, align === 'center' ? { align: 'center' } : undefined);
+              y += lineHeight;
+            }
+            y += afterGap;
+          };
+
+          const addClause = (title, paragraphs) => {
+            ensureSpace(15);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10.5);
+            doc.text(pdfSafe(title), marginX, y);
+            y += 5.5;
+            for (const p of paragraphs) {
+              if (typeof p === 'object' && p.bullet) {
+                addWrappedText(`- ${p.bullet}`, { fontSize: 9.8, indent: 4, lineHeight: 4.6, afterGap: 1.5 });
+              } else {
+                addWrappedText(p, { fontSize: 9.8, lineHeight: 4.7, afterGap: 2.2 });
+              }
+            }
+            y += 1.8;
+          };
+
+          const drawAlphaMark = (x, yPos, size) => {
+            if (typeof doc.roundedRect !== 'function' || typeof doc.lines !== 'function') return false;
+            const s = size / 48;
+            doc.setFillColor(15, 76, 129);
+            doc.roundedRect(x, yPos, size, size, 7 * s, 7 * s, 'F');
+            if (size >= 10) {
+              doc.setDrawColor(100, 149, 200);
+              doc.setLineWidth(0.25);
+              doc.roundedRect(x + 0.75 * s, yPos + 0.75 * s, size - 1.5 * s, size - 1.5 * s, 6.25 * s, 6.25 * s, 'S');
+            }
+            doc.setFillColor(255, 255, 255);
+            doc.lines([[12.5, 26], [-5.5, 0], [-7, -15.3], [-7, 15.3], [-5.5, 0]], x + 24 * s, yPos + 10.5 * s, [s, s], 'F', true);
+            doc.setFillColor(203, 213, 225);
+            doc.roundedRect(x + 19.5 * s, yPos + 31.2 * s, 9 * s, 3.6 * s, 1 * s, 1 * s, 'F');
+            doc.setFillColor(0, 0, 0);
+            doc.setDrawColor(0, 0, 0);
+            doc.setTextColor(0, 0, 0);
+            return true;
+          };
+
+          // Cabeçalho timbrado do contratado (Página 1)
+          const logoSize = 14;
+          const logoX = marginX;
+          const logoY = 15;
+          const drewMark = drawAlphaMark(logoX, logoY, logoSize);
+          const brandX = drewMark ? marginX + logoSize + 3.5 : marginX;
+          const brandUpper = pdfSafe((c.displayHeaderName || 'Alpha System').toUpperCase());
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(14);
+          const brandParts = brandUpper.trim().split(/\s+/).filter(Boolean);
+          let brandRightX = brandX;
+          let brandBottomY = logoY + 6.5;
+
+          if (brandParts.length > 1 && doc.getTextWidth(brandUpper) <= 95) {
+            const firstPart = `${brandParts[0]} `;
+            const restPart = brandParts.slice(1).join(' ');
+            doc.setTextColor(33, 37, 41);
+            doc.text(firstPart, brandX, logoY + 6);
+            const firstW = doc.getTextWidth(firstPart);
+            doc.setTextColor(15, 76, 129);
+            doc.text(restPart, brandX + firstW, logoY + 6);
+            brandRightX = brandX + firstW + doc.getTextWidth(restPart);
+          } else {
+            const availW = pageWidth - marginX - brandX;
+            const nameLines = doc.splitTextToSize(brandUpper, availW);
+            doc.setTextColor(33, 37, 41);
+            let ny = logoY + 6;
+            for (const line of nameLines) {
+              doc.text(line, brandX, ny);
+              brandRightX = Math.max(brandRightX, brandX + doc.getTextWidth(line));
+              ny += 5.5;
+            }
+            brandBottomY = ny - 0.5;
+          }
+
+          const cnpjY = Math.max(logoY + 11.2, brandBottomY + 4.5);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8.8);
+          doc.setTextColor(84, 93, 102);
+          const cnpjLine = pdfSafe(`CNPJ ${c.cnpj}`);
+          doc.text(cnpjLine, brandX, cnpjY);
+          brandRightX = Math.max(brandRightX, brandX + doc.getTextWidth(cnpjLine));
+          let headerBottomY = cnpjY + 2;
+
+          const rightContactLines = [];
+          if (c.email) rightContactLines.push(pdfSafe(c.email));
+          if (c.telefone) rightContactLines.push(pdfSafe(`WhatsApp: ${c.telefone}`));
+
+          if (rightContactLines.length > 0) {
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8.5);
+            doc.setTextColor(84, 93, 102);
+            if (brandRightX < 125) {
+              let cy = logoY + 5.5;
+              for (const line of rightContactLines) {
+                doc.text(line, pageWidth - marginX, cy, { align: 'right' });
+                cy += 5;
+              }
+              headerBottomY = Math.max(headerBottomY, cy - 1);
+            } else {
+              let cy = Math.max(headerBottomY, logoY + logoSize) + 4;
+              const stacked = doc.splitTextToSize(rightContactLines.join('  |  '), contentWidth);
+              for (const line of stacked) {
+                doc.text(line, marginX, cy);
+                cy += 4.3;
+              }
+              headerBottomY = cy - 1;
+            }
+          }
+
+          y = Math.max(headerBottomY, logoY + logoSize + 3.5);
+          doc.setDrawColor(15, 76, 129);
+          doc.setLineWidth(0.5);
+          doc.line(marginX, y, pageWidth - marginX, y);
+          doc.setDrawColor(0, 0, 0);
+          doc.setTextColor(0, 0, 0);
+          y += 7.5;
+
+          // Título
+          addWrappedText('CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE DESENVOLVIMENTO DE WEBSITE', {
+            fontSize: 12,
+            fontStyle: 'bold',
+            lineHeight: 5.5,
+            afterGap: 5,
+            align: 'center'
+          });
+
+          // Qualificação das partes
+          const contractorQual = [
+            `CONTRATADO: ${c.identificacaoLegal}, com endereço comercial em ${c.endereco}`
+          ];
+          if (c.email) contractorQual.push(`e-mail ${c.email}`);
+          if (c.telefone) contractorQual.push(`telefone/WhatsApp ${c.telefone}`);
+          addWrappedText(`${contractorQual.join(', ')}.`, { fontSize: 9.8, lineHeight: 4.7, afterGap: 3 });
+
+          const clientQualParts = [
+            `CONTRATANTE: ${client.name}, inscrito(a) no CPF/CNPJ sob o nº ${client.doc}`
+          ];
+          if (client.segment) clientQualParts.push(`atuante no segmento de ${client.segment}`);
+          if (client.address) clientQualParts.push(`com endereço em ${client.address}`);
+          if (client.email) clientQualParts.push(`e-mail ${client.email}`);
+          if (client.phone) clientQualParts.push(`telefone ${client.phone}`);
+          addWrappedText(`${clientQualParts.join(', ')}.`, { fontSize: 9.8, lineHeight: 4.7, afterGap: 3.5 });
+
+          addWrappedText('As partes acima identificadas celebram o presente Contrato de Prestação de Serviços, que se regerá pelas cláusulas a seguir:', {
+            fontSize: 9.8,
+            lineHeight: 4.7,
+            afterGap: 4
+          });
+
+          // Cláusula 1: Objeto
+          const segText = client.segment ? ` destinado ao segmento de ${client.segment}` : '';
+          const pagesText = q.paginasExtras > 0
+            ? `, acrescido de ${q.paginasExtras} ${q.paginasExtras === 1 ? 'página extra' : 'páginas extras'}`
+            : '';
+          addClause('CLÁUSULA 1ª - DO OBJETO', [
+            `O presente contrato tem por objeto o desenvolvimento, pelo CONTRATADO em favor do CONTRATANTE, de um website no pacote ${q.pkg.nome} (${q.pkg.paginasIncluidas})${pagesText}${segText}, conforme o escopo detalhado na Cláusula 2ª.`
+          ]);
+
+          // Cláusula 2: Escopo (itens inclusos do pacote + extras marcados)
+          const scopeParagraphs = [
+            `O escopo dos serviços contratados segue o pacote ${q.pkg.nome} (${q.pkg.paginasIncluidas}) e compreende exclusivamente os itens abaixo relacionados:`
+          ];
+          for (const item of q.pkg.itens) {
+            scopeParagraphs.push({ bullet: item });
+          }
+          if (q.paginasExtras > 0) {
+            scopeParagraphs.push({
+              bullet: `${q.paginasExtras} ${q.paginasExtras === 1 ? 'página adicional' : 'páginas adicionais'} além das páginas incluídas no pacote`
+            });
+          }
+          for (const extra of q.extrasSelecionados) {
+            scopeParagraphs.push({ bullet: extra.contractDesc });
+          }
+          const hasRevisao = q.pkg.itens.some((i) => /revis[aã]o|revis[oõ]es/i.test(i));
+          const hasSuporte = q.pkg.itens.some((i) => /suporte/i.test(i));
+          if (!hasRevisao) {
+            scopeParagraphs.push({ bullet: '2 (duas) rodadas de revisão após a apresentação da versão inicial' });
+          }
+          if (!hasSuporte) {
+            scopeParagraphs.push({ bullet: '30 (trinta) dias corridos de suporte técnico pós-entrega para correções de funcionamento dentro do escopo entregue' });
+          }
+          if (q.manutencao) {
+            scopeParagraphs.push({
+              bullet: `Plano opcional de manutenção e hospedagem mensal contratado à parte pelo valor de ${formatBRL(q.manutencaoMensal)}/mês`
+            });
+          }
+          scopeParagraphs.push('Funcionalidades, páginas ou integrações não listadas nesta cláusula não fazem parte do escopo e dependerão de orçamento complementar aprovado por escrito.');
+          addClause('CLÁUSULA 2ª - DO ESCOPO DOS SERVIÇOS', scopeParagraphs);
+
+          // Cláusula 3: Prazo (prazo estimado calculado)
+          const prazoDesc = q.urgencia
+            ? `${q.prazoTexto}, em regime de urgência (redução de ${q.urgenciaReducaoPrazoPct}% sobre o prazo padrão)`
+            : q.prazoTexto;
+          addClause('CLÁUSULA 3ª - DO PRAZO DE ENTREGA', [
+            `O prazo estimado para entrega da primeira versão funcional do website é de ${prazoDesc}, contados a partir da data em que ocorrer, cumulativamente, a confirmação do pagamento da entrada e o recebimento completo de todos os materiais, acessos, textos, imagens e informações necessários sob responsabilidade do CONTRATANTE.`,
+            'O prazo ficará automaticamente suspenso pelo período em que houver atraso do CONTRATANTE no envio de materiais, credenciais, aprovações ou respostas às solicitações do CONTRATADO, sem que isso caracterize inadimplemento ou mora do CONTRATADO.'
+          ]);
+
+          // Cláusula 4: Valor e pagamento
+          const pixInfo = c.chavePix ? ` mediante Pix para a chave "${c.chavePix}"` : ' via transferência Pix para dados informados pelo CONTRATADO';
+          const cl4 = [
+            `Pelos serviços descritos nas Cláusulas 1ª e 2ª, o CONTRATANTE pagará ao CONTRATADO o valor total de ${formatBRL(q.total)}, da seguinte forma:`,
+            { bullet: `50% (cinquenta por cento) de entrada, equivalente a ${formatBRL(q.entrada)}, na aprovação da proposta e assinatura deste contrato, como condição para início dos trabalhos;` },
+            { bullet: `50% (cinquenta por cento) restantes, equivalente a ${formatBRL(q.entrega)}, na entrega final do website concluído e antes da liberação definitiva ou publicação em produção.` },
+            `Os pagamentos deverão ser realizados preferencialmente${pixInfo}.`,
+            'Em caso de atraso no pagamento de qualquer parcela, incidirá multa moratória de 2% (dois por cento) sobre o valor devido, acrescida de juros de mora de 1% (um por cento) ao mês, calculados pro rata die até a efetiva quitação.'
+          ];
+          if (q.manutencao) {
+            cl4.push(`A manutenção e hospedagem mensal opcional, no valor de ${formatBRL(q.manutencaoMensal)} por mês, será cobrada mensalmente em separado após a entrega do site, sujeita às mesmas penalidades por atraso.`);
+          }
+          addClause('CLÁUSULA 4ª - DO VALOR E DA FORMA DE PAGAMENTO', cl4);
+
+          // Cláusula 5: Revisões e suporte
+          addClause('CLÁUSULA 5ª - DAS REVISÕES E DO SUPORTE', [
+            'Estão incluídas no valor contratado 2 (duas) rodadas de revisão sobre o layout e conteúdo apresentados, devendo o CONTRATANTE consolidar todos os ajustes desejados por escrito em cada rodada. Alterações que modifiquem integralmente a estrutura aprovada ou excedam as duas rodadas incluídas serão orçadas à parte.',
+            'Após a entrega final, o CONTRATADO prestará suporte técnico gratuito por 30 (trinta) dias corridos exclusivamente para correção de eventuais falhas técnicas originadas no desenvolvimento. Não estão cobertos criação de novas seções/páginas, alterações de layout após aprovação ou danos decorrentes de intervenções do CONTRATANTE ou de terceiros.'
+          ]);
+
+          // Cláusula 6: Obrigações do contratante
+          addClause('CLÁUSULA 6ª - DAS OBRIGAÇÕES DO CONTRATANTE', [
+            'Fornecer ao CONTRATADO, em tempo hábil, todos os textos, imagens, logotipos, dados cadastrais, acessos técnicos e aprovações necessários à execução do projeto, salvo itens expressamente assumidos pelo CONTRATADO no escopo.',
+            'Garantir que possui os direitos autorais, licenças e autorizações de uso de todo o material enviado ao CONTRATADO, assumindo integral responsabilidade perante terceiros.',
+            'Efetuar os pagamentos nos valores e prazos estipulados na Cláusula 4ª.'
+          ]);
+
+          // Cláusula 7: Obrigações do contratado
+          addClause('CLÁUSULA 7ª - DAS OBRIGAÇÕES DO CONTRATADO', [
+            'Executar os serviços com diligência técnica e boas práticas de desenvolvimento web, entregando o website funcional e responsivo conforme o escopo contratado.',
+            'Manter o CONTRATANTE informado sobre o andamento do projeto e observar os prazos acordados, ressalvadas as suspensões causadas por pendências do CONTRATANTE.',
+            'Preservar o sigilo sobre informações estratégicas e credenciais de acesso fornecidas para a execução do serviço.'
+          ]);
+
+          // Cláusula 8: Domínio e hospedagem
+          const domainNote = q.extrasSelecionados.some((item) => item.key === 'dominio')
+            ? 'Embora a configuração técnica inicial de domínio e hospedagem esteja incluída no escopo, a titularidade das contas, renovações anuais e faturas permanecem sob nome e responsabilidade financeira exclusiva do CONTRATANTE.'
+            : 'Os serviços de registro de domínio e contratação de servidor de hospedagem não estão incluídos no valor do desenvolvimento, salvo contratação em separado.';
+          addClause('CLÁUSULA 8ª - DO DOMÍNIO E DA HOSPEDAGEM', [
+            'O domínio e a hospedagem do website deverão ser registrados e mantidos em nome e titularidade do CONTRATANTE, cabendo a ele o pagamento direto das taxas de registro, renovação, certificados e mensalidades dos provedores escolhidos.',
+            domainNote
+          ]);
+
+          // Cláusula 9: Propriedade intelectual
+          addClause('CLÁUSULA 9ª - DA PROPRIEDADE INTELECTUAL E PORTFÓLIO', [
+            'Os direitos de uso do website desenvolvido somente serão liberados e transferidos ao CONTRATANTE após o pagamento integral de todos os valores pactuados neste instrumento.',
+            'Fica expressamente autorizado ao CONTRATADO divulgar o projeto desenvolvido em seu portfólio comercial, redes sociais e materiais de apresentação profissional, incluindo captura de telas e link público, salvo solicitação formal em sentido contrário antes da publicação.'
+          ]);
+
+          // Cláusula 10: Limitação de responsabilidade
+          addClause('CLÁUSULA 10ª - DA LIMITAÇÃO DE RESPONSABILIDADE', [
+            'A obrigação do CONTRATADO é de meio, e não de resultado comercial. O CONTRATADO não garante posicionamento específico nos resultados orgânicos do Google ou de outros buscadores, nem garante volume de acessos, geração de leads, faturamento ou vendas decorrentes do website.',
+            'O CONTRATADO não se responsabiliza por instabilidades, indisponibilidades ou alterações promovidas por serviços de terceiros (provedores de hospedagem, registradores de domínio, APIs externas ou plataformas), nem por falhas causadas por edições realizadas pelo CONTRATANTE ou terceiros após a entrega.'
+          ]);
+
+          // Cláusula 11: Vigência e Fidelidade
+          const cl11 = fidelity.fidelidadeMeses > 0
+            ? [
+                `O presente contrato entra em vigor na data de sua assinatura, estabelecendo-se prazo mínimo de vigência e fidelidade de ${fidelity.fidelidadeMeses} meses para a prestação contínua, manutenção e exclusividade vinculadas ao projeto.`,
+                `A resilição ou quebra imotivada do prazo mínimo de fidelidade por iniciativa do CONTRATANTE antes do término dos ${fidelity.fidelidadeMeses} meses sujeitará o CONTRATANTE ao pagamento de multa proporcional de ${Math.min(100, Math.max(0, fidelity.multaFidelidadePct))}% sobre o saldo proporcional ao período restante da fidelidade, limitada ao valor da obrigação principal remanescente.`
+              ]
+            : [
+                'O presente contrato entra em vigor na data de sua assinatura, permanecendo válido durante toda a execução do projeto, entrega e obrigações pós-contratuais aplicáveis, sem prazo mínimo de fidelidade contratual.'
+              ];
+          addClause('CLÁUSULA 11ª - DA VIGÊNCIA E FIDELIDADE', cl11);
+
+          // Cláusula 12: Exclusividade de execução e manutenção
+          addClause('CLÁUSULA 12ª - DA EXCLUSIVIDADE DE EXECUÇÃO E MANUTENÇÃO', [
+            `Durante ${fidelity.exclusividadeMeses} meses contados da assinatura, o CONTRATANTE não poderá contratar nem permitir que terceiros alterem, editem, mantenham, redesenhem ou hospedem o site objeto deste contrato, ficando tais serviços sob responsabilidade exclusiva do CONTRATADO. A exclusividade não afeta a titularidade do domínio, que permanece em nome do CONTRATANTE, nem impede a contratação de outros serviços de marketing, tráfego pago ou mídias sociais.`
+          ]);
+
+          // Cláusula 13: Proteção do material e da proposta
+          addClause('CLÁUSULA 13ª - DA PROTEÇÃO DO MATERIAL E DA PROPOSTA', [
+            `O CONTRATANTE reconhece que a proposta, o layout, a estrutura de páginas, os textos, as imagens, os conceitos criativos, os códigos e os demais materiais apresentados pelo CONTRATADO, em reunião, apresentação formal ou conversa informal, por qualquer meio (presencial, WhatsApp, e-mail, videochamada, mensagens ou ligações), são de autoria do CONTRATADO e confidenciais. Fica proibido ao CONTRATANTE reproduzir, copiar, adaptar, utilizar ou repassar a terceiros esse material, no todo ou em parte, para criar site ou material equivalente, salvo mediante pagamento e autorização escrita do CONTRATADO. A obrigação vale durante a vigência do contrato e por ${fidelity.confidencialidadeMeses} meses após seu término ou rescisão.`
+          ]);
+
+          // Cláusula 14: Multa e medidas judiciais
+          const multaPctEfetiva = Math.min(100, Math.max(0, fidelity.multaPct));
+          const multaValor = round2(Math.min(q.total, q.total * (multaPctEfetiva / 100)));
+          addClause('CLÁUSULA 14ª - DA MULTA E DAS MEDIDAS JUDICIAIS', [
+            `O descumprimento das cláusulas de exclusividade e de proteção do material sujeita o CONTRATANTE ao pagamento de multa de ${multaPctEfetiva}% do valor total do projeto (${formatBRL(multaValor)}), sem prejuízo de perdas e danos e das medidas judiciais cabíveis, inclusive para fazer cessar o uso indevido. A multa deve ser proporcional e nunca superior ao valor da obrigação principal. A quebra do prazo mínimo de fidelidade segue a multa já prevista na cláusula de vigência.`
+          ]);
+
+          // Cláusula 15: Rescisão
+          addClause('CLÁUSULA 15ª - DA RESCISÃO', [
+            'O presente contrato poderá ser rescindido por qualquer das partes mediante comunicação escrita com aviso prévio mínimo de 5 (cinco) dias corridos, permanecendo vigentes as obrigações de proteção do material e confidencialidade pelo prazo estipulado na Cláusula 13ª.',
+            'Caso a rescisão ocorra por iniciativa do CONTRATANTE ou por sua inadimplência após o início da execução dos serviços pelo CONTRATADO, o valor pago a título de entrada não será devolvido, destinando-se à remuneração do trabalho já mobilizado e executado. Se o percentual executado superar o valor da entrada, será devida a diferença proporcional até a data da rescisão.'
+          ]);
+
+          // Cláusula 16: LGPD
+          addClause('CLÁUSULA 16ª - DA PROTEÇÃO DE DADOS (LGPD)', [
+            'As partes comprometem-se a cumprir a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 - LGPD) no tratamento de dados pessoais compartilhados em razão deste contrato, utilizando-os exclusivamente para a execução do objeto contratual.',
+            'Cabe ao CONTRATANTE, na condição de controlador dos dados coletados por seu website após a publicação, providenciar e manter atualizados seus próprios avisos de privacidade, termos de uso e consentimentos exigidos pela legislação aplicável.'
+          ]);
+
+          // Cláusula 17: Foro
+          addClause('CLÁUSULA 17ª - DO FORO', [
+            `Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca de ${c.foro}, com renúncia expressa a qualquer outro, por mais privilegiado que seja.`
+          ]);
+
+          // Fechamento, local, data e assinaturas juntos na mesma página
+          ensureSpace(72);
+          addWrappedText('E, por estarem assim justas e contratadas, as partes assinam o presente instrumento em meio eletrônico ou físico, para que produza todos os efeitos legais.', {
+            fontSize: 9.8,
+            lineHeight: 4.7,
+            afterGap: 5
+          });
+
+          const localForo = c.foro || 'São Paulo/SP';
+          addWrappedText(`${localForo}, ${formatFullDatePtBr(new Date())}.`, {
+            fontSize: 10,
+            fontStyle: 'bold',
+            lineHeight: 5,
+            afterGap: 16
+          });
+
+          ensureSpace(30);
+          const colWidth = 76;
+          const leftX = marginX;
+          const rightX = pageWidth - marginX - colWidth;
+
+          doc.setDrawColor(60);
+          doc.setLineWidth(0.35);
+          doc.line(leftX, y, leftX + colWidth, y);
+          doc.line(rightX, y, rightX + colWidth, y);
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.text('CONTRATADO', leftX, y + 4.5);
+          doc.text('CONTRATANTE', rightX, y + 4.5);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8.5);
+          const leftSub = doc.splitTextToSize(pdfSafe(`${c.displayHeaderName}\nCNPJ: ${c.cnpj}`), colWidth);
+          const rightSub = doc.splitTextToSize(pdfSafe(`${client.name}\nCPF/CNPJ: ${client.doc}`), colWidth);
+
+          let ly = y + 9;
+          for (const line of leftSub) {
+            doc.text(line, leftX, ly);
+            ly += 4;
+          }
+          let ry = y + 9;
+          for (const line of rightSub) {
+            doc.text(line, rightX, ry);
+            ry += 4;
+          }
+
+          // Rodapé institucional e numeração de páginas: Página x de y
+          const totalPages = doc.getNumberOfPages();
+          for (let page = 1; page <= totalPages; page += 1) {
+            doc.setPage(page);
+            doc.setDrawColor(206, 212, 218);
+            doc.setLineWidth(0.25);
+            doc.line(marginX, 280, pageWidth - marginX, 280);
+            doc.setDrawColor(0, 0, 0);
+
+            const drewFooterMark = drawAlphaMark(marginX, 282.3, 5.2);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(7.8);
+            doc.setTextColor(84, 93, 102);
+            const footerBrandLine = pdfSafe(`${(c.displayHeaderName || 'Alpha System').toUpperCase()}  |  CNPJ ${c.cnpj}`);
+            doc.text(footerBrandLine, drewFooterMark ? marginX + 6.8 : marginX, 285.9);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8.5);
+            doc.setTextColor(100);
+            doc.text(pdfSafe(`Página ${page} de ${totalPages}`), pageWidth - marginX, 285.9, { align: 'right' });
+            doc.setTextColor(0, 0, 0);
+          }
+
+          const fileName = `Contrato - ${sanitizeFileName(client.name)}.pdf`;
+          doc.save(fileName);
+
+          const pendingCount = CONTRACTOR_FIELDS.filter((f) => String(contractor[f.key] || '').trim().toUpperCase() === '[PREENCHER]').length;
+          if (pendingCount > 0) {
+            showFeedback('success', `Contrato "${fileName}" gerado e baixado! Dica: revise ${pendingCount} campo(s) em "Meus dados" ainda marcados com [PREENCHER].`);
+          } else {
+            showFeedback('success', `Contrato "${fileName}" gerado e baixado com sucesso!`);
+          }
+        } catch (err) {
+          showFeedback('error', `Erro ao gerar o PDF do contrato: ${err && err.message ? err.message : 'erro inesperado'}.`);
+        }
+      }
+
+      // Eventos da seção "O site"
+      document.getElementById('sec-site').addEventListener('input', (e) => {
+        if (e.target && e.target.name === 'pacote') {
+          selectedPackageId = e.target.value;
+        }
+        if (e.target && e.target.name === 'extras' && !e.target.disabled) {
+          userExtras[e.target.value] = Boolean(e.target.checked);
+        }
+        if (e.target === el.extraPages) {
+          const val = Number(el.extraPages.value);
+          if (val < 0) el.extraPages.value = '0';
+          if (val > 99) el.extraPages.value = '99';
+        }
+        renderQuote();
+      });
+
+      document.getElementById('sec-site').addEventListener('change', (e) => {
+        if (e.target && e.target.name === 'pacote') {
+          selectedPackageId = e.target.value;
+        }
+        if (e.target && e.target.name === 'extras' && !e.target.disabled) {
+          userExtras[e.target.value] = Boolean(e.target.checked);
+        }
+        if (el.extraPages.value === '') el.extraPages.value = '0';
+        renderQuote();
+      });
+
+      el.pagesDec.addEventListener('click', () => {
+        const current = Math.max(0, Math.floor(Number(el.extraPages.value) || 0));
+        el.extraPages.value = String(Math.max(0, current - 1));
+        renderQuote();
+      });
+
+      el.pagesInc.addEventListener('click', () => {
+        const current = Math.max(0, Math.floor(Number(el.extraPages.value) || 0));
+        el.extraPages.value = String(Math.min(99, current + 1));
+        renderQuote();
+      });
+
+      el.copyProposalBtn.addEventListener('click', copyProposalToClipboard);
+
+      // Eventos dos pacotes editáveis na seção "Preços e pacotes"
+      for (const id of PACKAGE_IDS) {
+        const nomeEl = document.getElementById(`pkg-${id}-nome`);
+        const precoEl = document.getElementById(`pkg-${id}-preco`);
+        const minEl = document.getElementById(`pkg-${id}-min`);
+        const maxEl = document.getElementById(`pkg-${id}-max`);
+        const paginasEl = document.getElementById(`pkg-${id}-paginas`);
+        const itensEl = document.getElementById(`pkg-${id}-itens`);
+
+        nomeEl.addEventListener('input', () => {
+          prices.packages[id].nome = nomeEl.value;
+          safeSave(STORAGE_KEYS.prices, prices);
+          renderQuote();
+        });
+
+        precoEl.addEventListener('input', () => {
+          const raw = precoEl.value.trim();
+          if (raw === '') {
+            prices.packages[id].preco = null;
+          } else {
+            const val = Number(raw);
+            prices.packages[id].preco = (Number.isFinite(val) && val >= 0) ? round2(val) : null;
+          }
+          safeSave(STORAGE_KEYS.prices, prices);
+          renderQuote();
+        });
+
+        minEl.addEventListener('input', () => {
+          const raw = minEl.value.trim();
+          if (raw === '') {
+            prices.packages[id].prazoMin = null;
+          } else {
+            const val = Number(raw);
+            prices.packages[id].prazoMin = (Number.isFinite(val) && val >= 1) ? Math.round(val) : null;
+          }
+          safeSave(STORAGE_KEYS.prices, prices);
+          renderQuote();
+        });
+
+        maxEl.addEventListener('input', () => {
+          const raw = maxEl.value.trim();
+          if (raw === '') {
+            prices.packages[id].prazoMax = null;
+          } else {
+            const val = Number(raw);
+            prices.packages[id].prazoMax = (Number.isFinite(val) && val >= 1) ? Math.round(val) : null;
+          }
+          safeSave(STORAGE_KEYS.prices, prices);
+          renderQuote();
+        });
+
+        paginasEl.addEventListener('input', () => {
+          prices.packages[id].paginasIncluidas = paginasEl.value;
+          safeSave(STORAGE_KEYS.prices, prices);
+          renderQuote();
+        });
+
+        itensEl.addEventListener('input', () => {
+          prices.packages[id].itens = itensEl.value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+          safeSave(STORAGE_KEYS.prices, prices);
+          renderQuote();
+        });
+      }
+
+      // Eventos de preços e prazos de extras/multiplicadores
+      for (const field of PRICE_FIELDS) {
+        const input = document.getElementById(field.id);
+        if (!input) continue;
+        input.addEventListener('input', () => {
+          const val = Number(input.value);
+          if (Number.isFinite(val) && val >= field.min) {
+            const clamped = field.max !== undefined ? Math.min(field.max, val) : val;
+            prices[field.key] = field.integer ? Math.round(clamped) : round2(clamped);
+            safeSave(STORAGE_KEYS.prices, prices);
+            renderQuote();
+          }
+        });
+        input.addEventListener('blur', () => {
+          const val = Number(input.value);
+          if (!Number.isFinite(val) || val < field.min || (field.max !== undefined && val > field.max)) {
+            input.value = String(prices[field.key]);
+          }
+        });
+      }
+
+      el.resetPricesBtn.addEventListener('click', () => {
+        prices = createDefaultPriceState();
+        safeSave(STORAGE_KEYS.prices, prices);
+        populateConfigInputs();
+        renderQuote();
+        showFeedback('success', 'Preços e pacotes padrão restaurados e salvos.');
+      });
+
+      // Eventos da seção "Fidelidade e exclusividade"
+      for (const field of FIDELITY_FIELDS) {
+        const input = document.getElementById(field.id);
+        if (!input) continue;
+        input.addEventListener('input', () => {
+          const val = Number(input.value);
+          if (Number.isFinite(val) && val >= field.min) {
+            const clamped = field.max !== undefined ? Math.min(field.max, val) : val;
+            fidelity[field.key] = Math.round(clamped);
+            safeSave(STORAGE_KEYS.fidelity, fidelity);
+          }
+        });
+        input.addEventListener('blur', () => {
+          const val = Number(input.value);
+          if (!Number.isFinite(val) || val < field.min || (field.max !== undefined && val > field.max)) {
+            input.value = String(fidelity[field.key]);
+          }
+        });
+      }
+
+      el.resetFidelityBtn.addEventListener('click', () => {
+        fidelity = { ...DEFAULT_FIDELITY };
+        safeSave(STORAGE_KEYS.fidelity, fidelity);
+        populateConfigInputs();
+        showFeedback('success', 'Padrões de fidelidade e exclusividade restaurados e salvos.');
+      });
+
+      // Eventos da seção "Meus dados"
+      for (const field of CONTRACTOR_FIELDS) {
+        const input = document.getElementById(field.id);
+        if (!input) continue;
+        input.addEventListener('input', () => {
+          contractor[field.key] = input.value;
+          safeSave(STORAGE_KEYS.contractor, contractor);
+          updatePendingContractorBadge();
+          updateBrandHeader();
+        });
+      }
+
+      el.resetContractorBtn.addEventListener('click', () => {
+        contractor = { ...DEFAULT_CONTRACTOR };
+        safeSave(STORAGE_KEYS.contractor, contractor);
+        populateConfigInputs();
+        showFeedback('success', 'Dados padrão do contratado restaurados e salvos.');
+      });
+
+      // Limpar dados do cliente
+      el.clearClientBtn.addEventListener('click', () => {
+        el.form.reset();
+        clearFeedback();
+        el.form.querySelectorAll('input').forEach((input) => {
+          input.setCustomValidity('');
+          dirtyState.delete(input);
+          flagged.delete(input);
+          announced.delete(input);
+          input.classList.remove('user-invalid-fallback', 'user-valid-fallback');
+          input.setAttribute('aria-invalid', 'false');
+          linkError(input, false);
+        });
+        el.clientName.focus();
+      });
+
+      // Submissão: validar cliente e gerar PDF em 1 clique
+      el.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        clearFeedback();
+
+        const fieldsToValidate = [el.clientName, el.clientDoc, el.clientEmail];
+        const invalidFields = [];
+
+        for (const field of fieldsToValidate) {
+          applyRequiredTrimValidity(field);
+          if (!field.validity.valid) {
+            invalidFields.push(field);
+            syncAria(field, false, true);
+          } else {
+            syncAria(field, false, false);
+          }
+        }
+
+        if (invalidFields.length > 0) {
+          const missingLabels = invalidFields.map((field) => {
+            if (field === el.clientName) return 'Nome / Razão social';
+            if (field === el.clientDoc) return 'CPF / CNPJ';
+            return 'E-mail válido';
+          });
+          showFeedback('error', `Preencha corretamente antes de gerar o contrato: ${missingLabels.join(', ')}.`);
+          const first = invalidFields[0];
+          first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          first.focus({ preventScroll: true });
+          return;
+        }
+
+        generateContractPDF();
+      });
+
+      buildPackageCards();
+      populateConfigInputs();
+      renderQuote();
+    })();
+  </script>
+</body>
+</html>
