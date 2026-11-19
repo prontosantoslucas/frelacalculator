@@ -1804,8 +1804,8 @@
           <div class="choice-item">
             <input class="choice-input" type="checkbox" id="opt-urgencia" name="urgencia">
             <label class="choice-label" for="opt-urgencia">
-              <span class="choice-text" id="label-urgencia-text">Urgência (reduz prazo em -30%)</span>
-              <span class="choice-meta mono" id="badge-urgencia">+30% no preço</span>
+              <span class="choice-text" id="label-urgencia-text">Urgência: prazo 30% menor e preço 30% maior</span>
+              <span class="choice-meta mono" id="badge-urgencia">+30%</span>
             </label>
           </div>
           <div class="choice-item">
@@ -2204,6 +2204,16 @@
                 <span id="cfg-multa-fidelidade-hint" class="field-hint">Aplicada proporcionalmente ao período restante da fidelidade.</span>
                 <input type="number" id="cfg-multa-fidelidade-pct" class="mono" min="0" max="100" step="1" inputmode="numeric" aria-describedby="cfg-multa-fidelidade-hint">
               </div>
+              <div class="field">
+                <label for="cfg-renovacao-meses">Renovação automática (meses)</label>
+                <span id="cfg-renovacao-hint" class="field-hint">Período de renovação automática após a vigência inicial (0 desativa).</span>
+                <input type="number" id="cfg-renovacao-meses" class="mono" min="0" step="1" inputmode="numeric" aria-describedby="cfg-renovacao-hint">
+              </div>
+              <div class="field">
+                <label for="cfg-aviso-nao-renovacao-dias">Aviso de não renovação (dias)</label>
+                <span id="cfg-aviso-nao-renovacao-hint" class="field-hint">Antecedência mínima em dias corridos para comunicar a não renovação.</span>
+                <input type="number" id="cfg-aviso-nao-renovacao-dias" class="mono" min="0" step="1" inputmode="numeric" aria-describedby="cfg-aviso-nao-renovacao-hint">
+              </div>
             </div>
             <div class="details-actions">
               <button type="button" id="reset-fidelity-btn" class="btn-ghost">Restaurar fidelidade padrão</button>
@@ -2219,6 +2229,10 @@
           <div class="details-body">
             <p class="section-lead">Substitua os campos marcados com <code>[PREENCHER]</code> pelos seus dados reais ou apague os opcionais para omiti-los no PDF.</p>
             <div class="field-grid field-grid-2">
+              <div class="field field-span-2">
+                <label for="me-empresarial">Nome empresarial</label>
+                <input type="text" id="me-empresarial" autocomplete="organization">
+              </div>
               <div class="field">
                 <label for="me-fantasia">Nome fantasia</label>
                 <input type="text" id="me-fantasia" autocomplete="organization">
@@ -2385,6 +2399,7 @@
       };
 
       const DEFAULT_CONTRACTOR = Object.freeze({
+        nomeEmpresarial: '52.774.027 LUCAS ALVES DOS SANTOS',
         nomeFantasia: 'Alpha System',
         cnpj: '52.774.027/0001-35',
         endereco: 'Rua Fausto Domingues, 211, Jardim Fontalis, São Paulo/SP, CEP 02360-020',
@@ -2399,7 +2414,9 @@
         confidencialidadeMeses: 24,
         multaPct: 30,
         fidelidadeMeses: 12,
-        multaFidelidadePct: 30
+        multaFidelidadePct: 30,
+        renovacaoMeses: 6,
+        avisoNaoRenovacaoDias: 30
       });
 
       const FIDELITY_FIELDS = [
@@ -2407,7 +2424,9 @@
         { key: 'confidencialidadeMeses', id: 'cfg-confidencialidade-meses', min: 0, integer: true },
         { key: 'multaPct', id: 'cfg-multa-pct', min: 0, max: 100, integer: true },
         { key: 'fidelidadeMeses', id: 'cfg-fidelidade-meses', min: 0, integer: true },
-        { key: 'multaFidelidadePct', id: 'cfg-multa-fidelidade-pct', min: 0, max: 100, integer: true }
+        { key: 'multaFidelidadePct', id: 'cfg-multa-fidelidade-pct', min: 0, max: 100, integer: true },
+        { key: 'renovacaoMeses', id: 'cfg-renovacao-meses', min: 0, integer: true },
+        { key: 'avisoNaoRenovacaoDias', id: 'cfg-aviso-nao-renovacao-dias', min: 0, integer: true }
       ];
 
       const EXTRA_DEFS = [
@@ -2447,6 +2466,7 @@
       ];
 
       const CONTRACTOR_FIELDS = [
+        { key: 'nomeEmpresarial', id: 'me-empresarial' },
         { key: 'nomeFantasia', id: 'me-fantasia' },
         { key: 'cnpj', id: 'me-cnpj' },
         { key: 'endereco', id: 'me-endereco' },
@@ -3181,8 +3201,8 @@
         document.getElementById('badge-mult-micro').textContent = formatMult(prices.multMicro);
         document.getElementById('badge-mult-medio').textContent = formatMult(prices.multMedio);
         document.getElementById('badge-mult-maior').textContent = formatMult(prices.multMaior);
-        el.labelUrgenciaText.textContent = `Urgência (reduz prazo em -${prices.urgenciaReducaoPrazoPct}%)`;
-        el.badgeUrgencia.textContent = `+${prices.urgenciaPct}% no preço`;
+        el.labelUrgenciaText.textContent = `Urgência: prazo ${prices.urgenciaReducaoPrazoPct}% menor e preço ${prices.urgenciaPct}% maior`;
+        el.badgeUrgencia.textContent = `+${prices.urgenciaPct}%`;
         document.getElementById('badge-manutencao').textContent = `${formatBRL(prices.manutencao)}/mês`;
       }
 
@@ -3312,7 +3332,7 @@
         lines.push('', 'Se estiver de acordo, já preparo o contrato para assinatura.');
 
         const c = getContractorResolved();
-        const autoria = c.displayHeaderName;
+        const autoria = c.nomeLegal;
         lines.push('', `Este material é de autoria de ${autoria} e confidencial. Não pode ser reproduzido nem repassado a terceiros sem autorização.`);
 
         return lines.join('\n');
@@ -3352,7 +3372,8 @@
       }
 
       function getContractorResolved() {
-        const fantasia = cleanOptional(contractor.nomeFantasia) || DEFAULT_CONTRACTOR.nomeFantasia;
+        const empresarial = cleanOptional(contractor.nomeEmpresarial);
+        const fantasia = cleanOptional(contractor.nomeFantasia);
         const cnpj = cleanOptional(contractor.cnpj) || DEFAULT_CONTRACTOR.cnpj;
         const endereco = cleanOptional(contractor.endereco) || DEFAULT_CONTRACTOR.endereco;
         const email = cleanOptional(contractor.email);
@@ -3360,11 +3381,17 @@
         const chavePix = cleanOptional(contractor.chavePix);
         const foro = cleanOptional(contractor.foro) || DEFAULT_CONTRACTOR.foro;
 
-        const identificacaoLegal = `${fantasia}, inscrito no CNPJ sob o nº ${cnpj}`;
+        const displayHeaderName = fantasia || empresarial || DEFAULT_CONTRACTOR.nomeFantasia;
+        const nomeLegal = fantasia && empresarial
+          ? `${fantasia} (${empresarial})`
+          : (fantasia || empresarial || `${DEFAULT_CONTRACTOR.nomeFantasia} (${DEFAULT_CONTRACTOR.nomeEmpresarial})`);
+        const identificacaoLegal = `${nomeLegal}, CNPJ ${cnpj}`;
 
         return {
+          empresarial: empresarial || DEFAULT_CONTRACTOR.nomeEmpresarial,
           fantasia,
-          displayHeaderName: fantasia,
+          displayHeaderName,
+          nomeLegal,
           cnpj,
           endereco,
           email,
@@ -3725,14 +3752,26 @@
           ]);
 
           // Cláusula 11: Vigência e Fidelidade
-          const cl11 = fidelity.fidelidadeMeses > 0
-            ? [
-                `O presente contrato entra em vigor na data de sua assinatura, estabelecendo-se prazo mínimo de vigência e fidelidade de ${fidelity.fidelidadeMeses} meses para a prestação contínua, manutenção e exclusividade vinculadas ao projeto.`,
-                `A resilição ou quebra imotivada do prazo mínimo de fidelidade por iniciativa do CONTRATANTE antes do término dos ${fidelity.fidelidadeMeses} meses sujeitará o CONTRATANTE ao pagamento de multa proporcional de ${Math.min(100, Math.max(0, fidelity.multaFidelidadePct))}% sobre o saldo proporcional ao período restante da fidelidade, limitada ao valor da obrigação principal remanescente.`
-              ]
-            : [
-                'O presente contrato entra em vigor na data de sua assinatura, permanecendo válido durante toda a execução do projeto, entrega e obrigações pós-contratuais aplicáveis, sem prazo mínimo de fidelidade contratual.'
-              ];
+          const mesesRenov = Math.max(0, Number(fidelity.renovacaoMeses) || 0);
+          const diasAviso = Math.max(0, Number(fidelity.avisoNaoRenovacaoDias) || 0);
+          const mesesRenovLabel = `${mesesRenov} ${mesesRenov === 1 ? 'mês' : 'meses'}`;
+          const diasAvisoLabel = `${diasAviso} ${diasAviso === 1 ? 'dia corrido' : 'dias corridos'}`;
+          const cl11 = [];
+
+          if (fidelity.fidelidadeMeses > 0) {
+            cl11.push(`O presente contrato entra em vigor na data de sua assinatura, estabelecendo-se prazo mínimo de vigência e fidelidade de ${fidelity.fidelidadeMeses} meses para a prestação contínua, manutenção e exclusividade vinculadas ao projeto.`);
+            if (mesesRenov > 0) {
+              cl11.push(`Ao término da vigência inicial, os serviços contínuos vinculam-se à renovação automática por períodos sucessivos de ${mesesRenovLabel}, salvo se qualquer das partes comunicar expressamente por escrito a intenção de não renovar com antecedência mínima de ${diasAvisoLabel} do vencimento do período vigente.`);
+            } else {
+              cl11.push(`Ao término da vigência inicial, não haverá renovação automática, devendo eventual interesse na continuidade ou encerramento ser comunicado por escrito com antecedência mínima de ${diasAvisoLabel}.`);
+            }
+            cl11.push(`A resilição ou quebra imotivada do prazo mínimo de fidelidade por iniciativa do CONTRATANTE antes do término dos ${fidelity.fidelidadeMeses} meses sujeitará o CONTRATANTE ao pagamento de multa proporcional de ${Math.min(100, Math.max(0, fidelity.multaFidelidadePct))}% sobre o saldo proporcional ao período restante da fidelidade, limitada ao valor da obrigação principal remanescente.`);
+          } else {
+            cl11.push('O presente contrato entra em vigor na data de sua assinatura, permanecendo válido durante toda a execução do projeto, entrega e obrigações pós-contratuais aplicáveis, sem prazo mínimo de fidelidade contratual.');
+            if (mesesRenov > 0) {
+              cl11.push(`Havendo serviços recorrentes vinculados, eles serão renovados automaticamente por períodos de ${mesesRenovLabel}, salvo aviso expresso por escrito de não renovação enviado com antecedência mínima de ${diasAvisoLabel}.`);
+            }
+          }
           addClause('CLÁUSULA 11ª - DA VIGÊNCIA E FIDELIDADE', cl11);
 
           // Cláusula 12: Exclusividade de execução e manutenção
@@ -3802,7 +3841,7 @@
 
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(8.5);
-          const leftSub = doc.splitTextToSize(pdfSafe(`${c.displayHeaderName}\nCNPJ: ${c.cnpj}`), colWidth);
+          const leftSub = doc.splitTextToSize(pdfSafe(`${c.nomeLegal}\nCNPJ: ${c.cnpj}`), colWidth);
           const rightSub = doc.splitTextToSize(pdfSafe(`${client.name}\nCPF/CNPJ: ${client.doc}`), colWidth);
 
           let ly = y + 9;
