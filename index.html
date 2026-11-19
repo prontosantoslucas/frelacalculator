@@ -2,9 +2,17 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1c2430" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12161c" media="(prefers-color-scheme: dark)">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Alpha System">
   <title>Alpha System — Calculadora de Preço de Sites e Contrato PDF</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2314558f'/%3E%3Cstop offset='100%25' stop-color='%230d2b4e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='2' y='2' width='44' height='44' rx='7' fill='url(%23g)'/%3E%3Cpath d='M24 10.5L36.5 36.5H31L24 21.2L17 36.5H11.5Z' fill='%23ffffff'/%3E%3Crect x='19.5' y='31.2' width='9' height='3.6' rx='1' fill='%23cbd5e1'/%3E%3C/svg%3E">
   <style>
     :root {
@@ -229,6 +237,14 @@
       outline-offset: 2px;
     }
 
+    a,
+    button,
+    input,
+    label,
+    summary {
+      touch-action: manipulation;
+    }
+
     .mono {
       font-family: var(--font-mono);
       font-variant-numeric: tabular-nums;
@@ -239,6 +255,7 @@
       background-color: var(--topbar-bg);
       color: var(--topbar-text);
       border-block-end: 1px solid var(--topbar-border);
+      padding-block-start: env(safe-area-inset-top, 0px);
     }
 
     .topbar-inner {
@@ -331,6 +348,23 @@
       outline-offset: 2px;
     }
 
+    @media (max-width: 39.99rem) {
+      .topbar-nav {
+        inline-size: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.25rem;
+      }
+
+      .topbar-nav a {
+        justify-content: center;
+        padding: 0.45rem 0.25rem;
+        font-size: 0.8125rem;
+        min-block-size: 44px;
+        text-align: center;
+      }
+    }
+
     /* Faixa de subheader e breadcrumb */
     .page-subheader {
       background-color: var(--surface);
@@ -346,6 +380,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem 1rem;
+    }
+
+    .page-subheader-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .breadcrumb {
@@ -1509,7 +1550,12 @@
       gap: 0.75rem;
     }
 
+    .btn-ghost[hidden] {
+      display: none;
+    }
+
     .bar-summary {
+      flex: 1;
       min-inline-size: 0;
     }
 
@@ -1540,7 +1586,8 @@
 
     .sticky-bar .btn-primary {
       flex-shrink: 0;
-      padding-inline: 1.15rem;
+      padding-inline: 1.05rem;
+      white-space: nowrap;
     }
 
     @media (pointer: coarse) {
@@ -1624,8 +1671,9 @@
 
       <nav class="topbar-nav" aria-label="Navegação das seções">
         <a href="#sec-site">Escopo</a>
+        <a href="#sec-resultado">Resumo</a>
         <a href="#sec-cliente">Cliente</a>
-        <a href="#sec-config">Configurações</a>
+        <a href="#sec-config">Ajustes</a>
       </nav>
     </div>
   </header>
@@ -1637,7 +1685,10 @@
         <h1>Orçamento de Desenvolvimento de Site</h1>
         <p class="subheader-desc">Configure o escopo, preencha os dados do cliente e emita o contrato em PDF.</p>
       </div>
-      <span class="sys-meta">Dados salvos localmente</span>
+      <div class="page-subheader-actions">
+        <button type="button" id="install-app-btn" class="btn-ghost" hidden>Instalar app</button>
+        <span class="sys-meta">Dados salvos localmente</span>
+      </div>
     </div>
   </div>
 
@@ -2563,6 +2614,7 @@
         brandName: document.getElementById('brand-name'),
         brandCnpj: document.getElementById('brand-cnpj'),
         footerBrand: document.getElementById('footer-brand'),
+        installAppBtn: document.getElementById('install-app-btn'),
         packagesContainer: document.getElementById('packages-container'),
         extraPagesHint: document.getElementById('extra-pages-hint'),
         form: document.getElementById('contract-form'),
@@ -4030,6 +4082,71 @@
 
         generateContractPDF();
       });
+
+      // Instalação progressiva como aplicativo web (Web Install API + beforeinstallprompt) e Service Worker
+      const isStandalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+      const supportsWebInstall = typeof Navigator !== 'undefined' && typeof Navigator.prototype.install === 'function';
+      let deferredInstallPrompt;
+
+      if (el.installAppBtn) {
+        if (!isStandalone && supportsWebInstall) {
+          el.installAppBtn.hidden = false;
+        }
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+          event.preventDefault();
+          deferredInstallPrompt = event;
+          if (!isStandalone && !supportsWebInstall) {
+            el.installAppBtn.hidden = false;
+          }
+        });
+
+        window.addEventListener('appinstalled', () => {
+          deferredInstallPrompt = undefined;
+          el.installAppBtn.hidden = true;
+          showFeedback('success', 'Aplicativo Alpha System instalado na tela inicial.');
+        });
+
+        el.installAppBtn.addEventListener('click', async () => {
+          if (el.installAppBtn.getAttribute('aria-disabled') === 'true') return;
+          el.installAppBtn.setAttribute('aria-disabled', 'true');
+
+          try {
+            if (supportsWebInstall) {
+              await navigator.install();
+              showFeedback('success', 'Aplicativo Alpha System instalado ou aberto.');
+              el.installAppBtn.hidden = true;
+            } else if (deferredInstallPrompt) {
+              const promptEvent = deferredInstallPrompt;
+              deferredInstallPrompt = undefined;
+              await promptEvent.prompt();
+              const { outcome } = await promptEvent.userChoice;
+              if (outcome === 'accepted') {
+                showFeedback('success', 'Aplicativo Alpha System instalado na tela inicial.');
+              } else {
+                showFeedback('success', 'Instalação cancelada pelo usuário.');
+              }
+              if (!deferredInstallPrompt) {
+                el.installAppBtn.hidden = true;
+              }
+            }
+          } catch (error) {
+            if (error && error.name === 'AbortError') {
+              showFeedback('success', 'Instalação cancelada ou não pôde ser concluída.');
+            } else {
+              showFeedback('error', 'Não foi possível iniciar a instalação do aplicativo.');
+            }
+          } finally {
+            el.installAppBtn.removeAttribute('aria-disabled');
+          }
+        });
+      }
+
+      if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
 
       buildPackageCards();
       populateConfigInputs();
